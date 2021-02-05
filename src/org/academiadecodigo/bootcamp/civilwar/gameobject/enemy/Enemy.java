@@ -1,9 +1,9 @@
-package org.academiadecodigo.bootcamp.civilwar.gameobject.player;
+package org.academiadecodigo.bootcamp.civilwar.gameobject.enemy;
 
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyable;
 
-public class Player extends GameObject implements PlayerInterface, Destroyable {
+public class Enemy extends GameObject implements EnemyInterface, Destroyable {
 
 
 

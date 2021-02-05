@@ -1,4 +1,10 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface;
 
-public class Destroyable {
+
+public interface Destroyable {
+
+    public boolean isDestroyed();
+
+    public void hit(int damage);
+
 }
