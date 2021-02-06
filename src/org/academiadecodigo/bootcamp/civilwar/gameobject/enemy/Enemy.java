@@ -32,7 +32,7 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     }
 
     public Direction chooseDirection() {
-        int rand = Randomizer.getRandomInRange(4);
+        int rand = Randomizer.getRandomWithMax(4);
         switch (rand) {
             case 1:
                 return Direction.UP;

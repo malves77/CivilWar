@@ -5,7 +5,6 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyabl
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Direction;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.Weapon;
-import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.WeaponType;
 
 public class Player extends GameObject implements PlayerInterface, Destroyable {
     private boolean destroyed = false;
@@ -16,19 +15,12 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private Weapon liquidWeapon;
 
 
-    public Player(Position myPos, String player){
+    public Player(Position myPos, Weapon solidWeapon, Weapon liquidWeapon){
         super(myPos);
         this.health = 10;
         this.speed = 5;
-
-        // TO CHANGE
-        if(player.equals("SéDude")){
-            //solidWeapon = WeaponType.FRANCESINHA;
-            //liquidWeapon = WeaponType.VINHODOPORTO;
-        } else if(player.equals("AlfamaDude")) {
-            //solidWeapon = WeaponType.PASTELDEBELEM;
-            //liquidWeapon = WeaponType.GINJA;
-        }
+        this.solidWeapon = solidWeapon;
+        this.liquidWeapon = liquidWeapon;
 
     }
 
