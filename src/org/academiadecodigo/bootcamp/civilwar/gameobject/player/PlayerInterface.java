@@ -7,11 +7,8 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.Weapon;
 
 public interface PlayerInterface {
 
-    Position getPosition();
-
     void move(Direction direction);
 
     void attack(Weapon weapon);
-
 
 }
