@@ -21,6 +21,4 @@ public interface PositionInterface {
 
     boolean areEqual(Position target);
 
-
-
 }
