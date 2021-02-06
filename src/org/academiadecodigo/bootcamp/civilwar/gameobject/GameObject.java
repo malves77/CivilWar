@@ -14,7 +14,7 @@ public abstract class GameObject {
         myPos = newPos;
     }
 
-    Position getPosition() {
+    protected Position getPosition() {
         return myPos;
     }
 
