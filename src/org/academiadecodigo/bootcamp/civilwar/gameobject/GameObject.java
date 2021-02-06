@@ -6,11 +6,11 @@ public abstract class GameObject {
 
     private Position myPos;
 
-    public GameObject (Position myPos) {
+    protected GameObject (Position myPos) {
         this.myPos = myPos;
     }
 
-    void setPosition(Position newPos) {
+    protected void setPosition(Position newPos) {
         myPos = newPos;
     }
 
