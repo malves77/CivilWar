@@ -13,6 +13,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private Direction direction;
     private Weapon solidWeapon;
     private Weapon liquidWeapon;
+    private Position myPos;
 
 
     public Player(Position myPos, Weapon solidWeapon, Weapon liquidWeapon){
@@ -21,6 +22,8 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         this.speed = 5;
         this.solidWeapon = solidWeapon;
         this.liquidWeapon = liquidWeapon;
+        this.myPos = myPos;
+        myPos.show();
 
     }
 

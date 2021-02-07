@@ -2,6 +2,8 @@ package org.academiadecodigo.bootcamp.civilwar.gameobject.position;
 
 import org.academiadecodigo.bootcamp.civilwar.gameobject.Dimensions;
 import org.academiadecodigo.bootcamp.civilwar.Randomizer;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Position implements PositionInterface {
 
@@ -9,8 +11,12 @@ public class Position implements PositionInterface {
     private int yPos;
     private int width;
     private int height;
+    private Rectangle rect;
 
     public Position(int width, int height){
+        /**
+         * Constructor for enemies
+         */
         this.width = width;
         this.height = height;
 
@@ -21,6 +27,9 @@ public class Position implements PositionInterface {
     }
 
     public Position(int xPos, int yPos, int width, int height) {
+        /**
+         * Constructor for weapons and players
+         */
         this.xPos = xPos;
         this.yPos = yPos;
         this.width = width;
@@ -126,4 +135,11 @@ public class Position implements PositionInterface {
 
         return false;
     }
+
+    public void show(){
+        rect = new Rectangle(xPos, yPos, width, height);
+        rect.setColor(Color.MAGENTA);
+        rect.draw();
+    }
+
 }
