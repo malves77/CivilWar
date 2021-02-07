@@ -18,17 +18,41 @@ public class MyKeyboard implements KeyboardHandler {
     }
 
     public void init(){
-        KeyboardEvent event = new KeyboardEvent();
-        event.setKey(KeyboardEvent.KEY_UP);
-        event.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        KeyboardEvent eventUp = new KeyboardEvent();
+        eventUp.setKey(KeyboardEvent.KEY_UP);
+        eventUp.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-        keyboard.addEventListener(event);
+        KeyboardEvent eventDown = new KeyboardEvent();
+        eventDown.setKey(KeyboardEvent.KEY_DOWN);
+        eventDown.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        KeyboardEvent eventLeft = new KeyboardEvent();
+        eventLeft.setKey(KeyboardEvent.KEY_LEFT);
+        eventLeft.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        KeyboardEvent eventRight = new KeyboardEvent();
+        eventRight.setKey(KeyboardEvent.KEY_RIGHT);
+        eventRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        keyboard.addEventListener(eventUp);
+        keyboard.addEventListener(eventDown);
+        keyboard.addEventListener(eventLeft);
+        keyboard.addEventListener(eventRight);
     }
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent){
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_UP){
             player.move(Direction.UP);
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN){
+            player.move(Direction.DOWN);
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT){
+            player.move(Direction.LEFT);
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT){
+            player.move(Direction.RIGHT);
         }
     }
 
