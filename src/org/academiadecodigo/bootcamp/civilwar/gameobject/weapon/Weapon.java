@@ -17,8 +17,7 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
     private Position pos;
 
 
-    public Weapon(Position pos, WeaponType type) {
-        super(pos);
+    public Weapon( WeaponType type) {
         destroyed = false;
         this.type = type;
         //currentDirection = player.getDirection();
@@ -37,7 +36,10 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
         setDestroyed();
     }
 
-    public void move() {
+    public void move(Position pos, Direction direction) {
+        //atribuir
+        this.pos = pos;
+        currentDirection = direction;
         accelerate();
     }
 

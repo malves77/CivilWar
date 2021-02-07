@@ -6,6 +6,8 @@ public abstract class GameObject {
 
     private Position myPos;
 
+    protected GameObject (){}
+
     protected GameObject (Position myPos) {
         this.myPos = myPos;
     }

@@ -16,8 +16,8 @@ public class Screen {
         x = 0;
         y = 0;
         padding = 10;
-        width = Dimensions.getMapWidth() + Dimensions.getRightEdge() + padding;
-        height = Dimensions.getMapHeight() + Dimensions.getBottomEdge() + padding;
+        width = Dimensions.getRightEdge()  + padding * 2;
+        height = Dimensions.getBottomEdge() + padding * 2;
         rect = new Rectangle(x, y, width, height);
     }
 

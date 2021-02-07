@@ -2,8 +2,8 @@ package org.academiadecodigo.bootcamp.civilwar.gameobject;
 
 public class Dimensions {
 
-    private static int mapWidth = 200;
-    private static int mapHeight = 200;
+    private static int mapWidth = 400;
+    private static int mapHeight = 400;
     private static final int PADDING = 20;
     private static int xMap = PADDING;
     private static int yMap = PADDING;

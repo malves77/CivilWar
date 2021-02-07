@@ -32,26 +32,31 @@ public class Game {
 
         //creates enemies
         GameObject enemies[] = new GameObject[4];
+
         for (int i = 0; i < enemies.length; i++){
             Position pos = new Position(20, 20);
             enemies[i] = new Enemy(pos, 5, 20);
             System.out.println("New enemy created");
         }
 
-        start(enemies);
         //creates weapons
-        /*Position weaponPos1 = new Position(map.getX(), map.getY(), 10, 10);
-        weaponPos1.show();
-        Weapon weapon1 = new Weapon(weaponPos1, WeaponType.FRANCESINHA);
-        Position weaponPos2 = new Position(map.getX()+ 20 , map.getY()+ 20,10,10);
-        weaponPos2.show();
-        Weapon weapon2 = new Weapon(weaponPos2, WeaponType.VINHO_DO_PORTO);*/
+        Weapon[] weapons = new Weapon[4];
+        for(int i = 0; i < weapons.length; i++){
+            weapons[i] = new Weapon(WeaponType.FRANCESINHA);
+        }
 
-        /*//creates players
-        Position playerPosition = new Position(20, 20);
-        playerPosition.show();
-        Player player = new Player(playerPosition, weapon1, weapon2);
-*/
+        //creates player
+        Position playerPosition = new Position(350, 350);
+        Player player1 = new Player(playerPosition, weapons);
+
+        MyKeyboard keyboard = new MyKeyboard(player1);
+        keyboard.init();
+
+        player1.show();
+
+
+        start(enemies);
+
     }
 
     public void start(GameObject[] gameObjects) throws InterruptedException {

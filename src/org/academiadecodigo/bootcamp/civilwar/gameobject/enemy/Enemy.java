@@ -28,6 +28,7 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
         size = 20;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
         rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
+        //this.show();
     }
 
     public Enemy(Position myPos, int speed, int health) {
