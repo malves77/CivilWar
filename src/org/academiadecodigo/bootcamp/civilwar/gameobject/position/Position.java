@@ -56,55 +56,59 @@ public class Position implements PositionInterface {
     public void moveInDirection(Direction direction, int distance){
         switch (direction) {
             case UP:
-                moveUp(direction, distance);
+                moveUp(distance);
                 break;
             case DOWN:
-                moveDown(direction, distance);
+                moveDown(distance);
                 break;
             case LEFT:
-                moveLeft(direction, distance);
+                moveLeft(distance);
                 break;
             case RIGHT:
-                moveRight(direction, distance);
+                moveRight(distance);
                 break;
         }
     }
 
-    public void moveUp(Direction direction, int distance){
-        if(isEdge(direction, distance)) {
+    public void moveUp(int distance){
+        if(yPos - distance < Dimensions.getYMap()) {
             yPos = Dimensions.getYMap();
         } else {
             yPos -= distance;
         }
     }
 
-    public void moveDown(Direction direction, int distance){
-        if(isEdge(direction, distance)) {
+    public void moveDown( int distance){
+        if(yPos + distance > Dimensions.getBottomEdge() - getHeight()) {
             yPos = Dimensions.getBottomEdge() - getHeight();
         } else {
             yPos += distance;
         }
     }
 
-    public void moveLeft(Direction direction, int distance){
-        if(isEdge(direction, distance)) {
+    public void moveLeft( int distance){
+        if(xPos - distance < Dimensions.getXMap()) {
             xPos = Dimensions.getXMap();
         } else {
             xPos -= distance;
         }
     }
 
-    public void moveRight(Direction direction, int distance){
-        if(isEdge(direction, distance)){
+    public void moveRight(int distance){
+        if(xPos + distance > Dimensions.getRightEdge() - getWidth()){
             xPos = Dimensions.getRightEdge() - getWidth();
         } else {
             xPos += distance;
         }
     }
 
-    public boolean isEdge(Direction direction, int distance) {
+    public boolean isEdge(Direction direction) {
 
-        switch (direction) {
+        return (direction == Direction.UP && yPos == Dimensions.getYMap()) ||
+                (direction == Direction.DOWN && yPos == Dimensions.getBottomEdge()) ||
+                (direction == Direction.LEFT && xPos == Dimensions.getXMap()) ||
+                (direction == Direction.RIGHT && xPos == Dimensions.getRightEdge());
+        /*switch (direction) {
             case UP:
                 if(yPos - distance < Dimensions.getYMap()) {
                     return true;
@@ -128,18 +132,12 @@ public class Position implements PositionInterface {
             default:
                 System.out.println("No direction provided");
             }
-        return false;
+        return false;*/
     }
 
     public boolean areEqual(Position target){
 
         return false;
-    }
-
-    public void show(){
-        rect = new Rectangle(xPos, yPos, width, height);
-        rect.setColor(Color.MAGENTA);
-        rect.draw();
     }
 
 }

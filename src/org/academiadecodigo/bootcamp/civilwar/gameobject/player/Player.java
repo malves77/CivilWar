@@ -23,7 +23,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         this.solidWeapon = solidWeapon;
         this.liquidWeapon = liquidWeapon;
         this.myPos = myPos;
-        myPos.show();
+        //this.myPos.show();
 
     }
 

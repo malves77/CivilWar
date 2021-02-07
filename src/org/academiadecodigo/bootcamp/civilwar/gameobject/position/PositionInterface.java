@@ -12,12 +12,12 @@ public interface PositionInterface {
 
     void moveInDirection(Direction direction, int distance);
 
-    void moveUp(Direction direction, int distance);
-    void moveDown(Direction direction, int distance);
-    void moveLeft(Direction direction, int distance);
-    void moveRight(Direction direction, int distance);
+    void moveUp( int distance);
+    void moveDown( int distance);
+    void moveLeft(int distance);
+    void moveRight( int distance);
 
-    boolean isEdge(Direction direction, int distance);
+    boolean isEdge(Direction direction);
 
     boolean areEqual(Position target);
 
