@@ -14,6 +14,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private final int speed;
     private Direction direction;
     private Weapon[] weapons;
+    private int shotsFired;
     private Position myPos;
     private Rectangle rect;
     private int size;
@@ -24,6 +25,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         this.health = 10;
         this.speed = 5;
         this.weapons = weapons;
+        this.shotsFired = 0;
         this.myPos = myPos;
         this.size = 20;
         this.rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
@@ -46,8 +48,25 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         rect.translate(newX - oldX, newY - oldY);
     }
 
-    public void attack(Weapon weapon){
-        weapon.move(new Position(myPos.getX(), myPos.getY()), this.direction);
+    public void attack(){
+
+        if(!(shotsFired == weapons.length)){
+            System.out.println("fired " + shotsFired + " shots");
+            weapons[shotsFired].setFired();
+            weapons[shotsFired].move(new Position(myPos.getX(), myPos.getY()), this.direction);
+            shotsFired++;
+        }
+
+    }
+
+    /**
+     * @TODO reset when in specific place
+     */
+    public void resetShotsFired() {
+        shotsFired = 0;
+        for(Weapon weapon : weapons) {
+            weapon.respawn();
+        }
     }
 
     public boolean isDestroyed(){

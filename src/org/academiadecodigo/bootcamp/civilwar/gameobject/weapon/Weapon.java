@@ -5,6 +5,8 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyabl
 import org.academiadecodigo.bootcamp.civilwar.gameobject.player.Player;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Direction;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Weapon extends GameObject implements Destroyable, WeaponInterface {
 
@@ -14,17 +16,20 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
     private Direction currentDirection;
     private Player player;
     private int speed;
-    private Position pos;
-
+    private Position myPos;
+    private Rectangle rect;
+    private boolean fired;
 
     public Weapon( WeaponType type) {
         destroyed = false;
         this.type = type;
+        this.speed = 20;
         //currentDirection = player.getDirection();
     }
 
     public void setDestroyed() {
         destroyed = true;
+        rect.delete();
     }
 
     public boolean isDestroyed() {
@@ -38,18 +43,49 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
 
     public void move(Position pos, Direction direction) {
         //atribuir
-        this.pos = pos;
+        this.myPos = pos;
         currentDirection = direction;
+        show();
         accelerate();
     }
 
-    private void accelerate () {
+    public void accelerate () {
 
         if (isDestroyed()){
             return;
         }
+
+        int oldX = myPos.getX();
+        int oldY = myPos.getY();
+        System.out.println("Moving weapon");
         for (int speed = 0; speed < this.speed; speed++) {
-            super.getPosition().moveInDirection(currentDirection, 1);
+            myPos.moveInDirection(currentDirection, 1);
+            if(myPos.isEdge(currentDirection)){
+                setDestroyed();
+            }
         }
+
+        int newX = myPos.getX();
+        int newY = myPos.getY();
+
+        rect.translate(newX - oldX, newY - oldY);
+    }
+
+    public void setFired(){
+        fired = true;
+    }
+
+    public boolean getFired(){
+        return fired;
+    }
+
+    public void respawn(){
+        destroyed = false;
+    }
+
+    public void show(){
+        rect = new Rectangle(myPos.getX(), myPos.getY(), 10, 10);
+        rect.setColor(Color.GRAY);
+        rect.fill();
     }
 }

@@ -34,10 +34,15 @@ public class MyKeyboard implements KeyboardHandler {
         eventRight.setKey(KeyboardEvent.KEY_RIGHT);
         eventRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        KeyboardEvent eventShoot = new KeyboardEvent();
+        eventShoot.setKey(KeyboardEvent.KEY_SPACE);
+        eventShoot.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
         keyboard.addEventListener(eventUp);
         keyboard.addEventListener(eventDown);
         keyboard.addEventListener(eventLeft);
         keyboard.addEventListener(eventRight);
+        keyboard.addEventListener(eventShoot);
     }
 
     @Override
@@ -53,6 +58,9 @@ public class MyKeyboard implements KeyboardHandler {
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT){
             player.move(Direction.RIGHT);
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+            player.attack();
         }
     }
 

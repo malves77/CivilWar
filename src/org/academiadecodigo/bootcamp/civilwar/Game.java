@@ -55,11 +55,11 @@ public class Game {
         player1.show();
 
 
-        start(enemies);
+        start(enemies, weapons);
 
     }
 
-    public void start(GameObject[] gameObjects) throws InterruptedException {
+    public void start(GameObject[] gameObjects, Weapon[] weapons) throws InterruptedException {
 
         while(true){
 
@@ -68,6 +68,11 @@ public class Game {
                 if(enemy instanceof Enemy){
                     Enemy enem = (Enemy) enemy;
                     enem.move();
+                }
+            }
+            for(Weapon weapon : weapons) {
+                if(weapon.getFired()){
+                    weapon.accelerate();
                 }
             }
         }

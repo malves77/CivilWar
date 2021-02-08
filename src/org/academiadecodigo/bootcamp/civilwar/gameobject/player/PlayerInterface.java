@@ -9,6 +9,6 @@ public interface PlayerInterface {
 
     void move(Direction direction);
 
-    void attack(Weapon weapon);
+    void attack();
 
 }
