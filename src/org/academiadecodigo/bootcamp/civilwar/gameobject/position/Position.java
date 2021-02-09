@@ -23,7 +23,6 @@ public class Position implements PositionInterface {
         this.xPos = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getMapWidth() + Dimensions.getXMap() - getWidth());
         this.yPos = Randomizer.getRandomInRange(Dimensions.getYMap(), Dimensions.getMapHeight() + Dimensions.getYMap() - getHeight());
 
-
     }
 
     public Position(int xPos, int yPos) {
@@ -68,6 +67,18 @@ public class Position implements PositionInterface {
             case RIGHT:
                 moveRight(distance);
                 break;
+            case DIAGONAL_UPLEFT:
+                moveUpLeft(distance);
+                break;
+            case DIAGONAL_UPRIGHT:
+                moveUpRight(distance);
+                break;
+            case DIAGONAL_DOWNLEFT:
+                moveDownLeft(distance);
+                break;
+            case DIAGONAL_DOWNRIGHT:
+                moveDownRight(distance);
+                break;
         }
     }
 
@@ -87,7 +98,7 @@ public class Position implements PositionInterface {
         }
     }
 
-    public void moveLeft( int distance){
+    public void moveLeft(int distance){
         if(xPos - distance < Dimensions.getXMap()) {
             xPos = Dimensions.getXMap();
         } else {
@@ -102,6 +113,51 @@ public class Position implements PositionInterface {
             xPos += distance;
         }
     }
+
+    public void moveUpRight(int distance){
+        if(xPos + distance > Dimensions.getRightEdge() - getWidth() &&
+                yPos - distance < Dimensions.getYMap()){
+            xPos = Dimensions.getRightEdge() - getWidth();
+            yPos = Dimensions.getYMap();
+        } else {
+            xPos += distance;
+            yPos -= distance;
+        }
+    }
+
+    public void moveUpLeft(int distance){
+        if(xPos - distance < Dimensions.getXMap() &&
+                yPos - distance < Dimensions.getYMap()){
+            xPos = Dimensions.getXMap();
+            yPos = Dimensions.getYMap();
+        } else {
+            xPos -= distance;
+            yPos -= distance;
+        }
+    }
+
+    public void moveDownRight(int distance){
+        if(xPos + distance > Dimensions.getRightEdge() - getWidth() &&
+                yPos + distance > Dimensions.getBottomEdge() - getHeight()){
+            xPos = Dimensions.getRightEdge() - getWidth();
+            yPos = Dimensions.getBottomEdge() - getHeight();
+        } else {
+            xPos += distance;
+            yPos += distance;
+        }
+    }
+
+    public void moveDownLeft(int distance){
+        if(xPos - distance < Dimensions.getXMap() &&
+                yPos + distance > Dimensions.getBottomEdge() - getHeight()){
+            xPos = Dimensions.getXMap();
+            yPos = Dimensions.getBottomEdge() - getHeight();
+        } else {
+            xPos -= distance;
+            yPos += distance;
+        }
+    }
+
 
     public boolean isEdge(Direction direction) {
 

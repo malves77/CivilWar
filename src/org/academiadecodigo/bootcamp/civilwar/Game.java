@@ -18,6 +18,8 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.WeaponType;
 public class Game {
 
     //private GameObject = new GameObject();
+    Player player1;
+
 
     public void init() throws InterruptedException {
 
@@ -45,15 +47,15 @@ public class Game {
             weapons[i] = new Weapon(WeaponType.FRANCESINHA);
         }
 
+
+
+        MyKeyboard keyboard = new MyKeyboard();
+        keyboard.init();
         //creates player
         Position playerPosition = new Position(350, 350);
-        Player player1 = new Player(playerPosition, weapons);
-
-        MyKeyboard keyboard = new MyKeyboard(player1);
-        keyboard.init();
+        player1 = new Player(playerPosition, weapons, keyboard);
 
         player1.show();
-
 
         start(enemies, weapons);
 
@@ -75,6 +77,8 @@ public class Game {
                     weapon.accelerate();
                 }
             }
+            player1.move();
+
         }
 
 
