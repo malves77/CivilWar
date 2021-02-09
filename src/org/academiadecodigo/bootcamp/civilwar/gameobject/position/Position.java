@@ -115,45 +115,61 @@ public class Position implements PositionInterface {
     }
 
     public void moveUpRight(int distance){
-        if(xPos + distance > Dimensions.getRightEdge() - getWidth() &&
-                yPos - distance < Dimensions.getYMap()){
+        if(xPos + distance > Dimensions.getRightEdge() - getWidth()){
             xPos = Dimensions.getRightEdge() - getWidth();
-            yPos = Dimensions.getYMap();
         } else {
             xPos += distance;
+        }
+
+        if(yPos - distance < Dimensions.getYMap()) {
+            yPos = Dimensions.getYMap();
+        } else {
             yPos -= distance;
         }
     }
 
     public void moveUpLeft(int distance){
-        if(xPos - distance < Dimensions.getXMap() &&
-                yPos - distance < Dimensions.getYMap()){
+        //check left
+        if(xPos - distance < Dimensions.getXMap() ){
             xPos = Dimensions.getXMap();
-            yPos = Dimensions.getYMap();
         } else {
             xPos -= distance;
+        }
+
+        //check upper
+        if(yPos - distance < Dimensions.getYMap()){
+            yPos = Dimensions.getYMap();
+        } else {
             yPos -= distance;
         }
     }
 
     public void moveDownRight(int distance){
-        if(xPos + distance > Dimensions.getRightEdge() - getWidth() &&
-                yPos + distance > Dimensions.getBottomEdge() - getHeight()){
+        if(xPos + distance > Dimensions.getRightEdge() - getWidth() ){
             xPos = Dimensions.getRightEdge() - getWidth();
-            yPos = Dimensions.getBottomEdge() - getHeight();
+
         } else {
             xPos += distance;
+
+        }
+
+        if(yPos + distance > Dimensions.getBottomEdge() - getHeight()){
+            yPos = Dimensions.getBottomEdge() - getHeight();
+        } else {
             yPos += distance;
         }
     }
 
     public void moveDownLeft(int distance){
-        if(xPos - distance < Dimensions.getXMap() &&
-                yPos + distance > Dimensions.getBottomEdge() - getHeight()){
+        if(xPos - distance < Dimensions.getXMap() ){
             xPos = Dimensions.getXMap();
-            yPos = Dimensions.getBottomEdge() - getHeight();
         } else {
             xPos -= distance;
+        }
+
+        if(yPos + distance > Dimensions.getBottomEdge() - getHeight()) {
+            yPos = Dimensions.getBottomEdge() - getHeight();
+        } else {
             yPos += distance;
         }
     }
@@ -161,35 +177,23 @@ public class Position implements PositionInterface {
 
     public boolean isEdge(Direction direction) {
 
-        return (direction == Direction.UP && yPos == Dimensions.getYMap()) ||
+        return ( //upper wall
+                direction == Direction.UP && yPos <= Dimensions.getYMap()) ||
+                (direction == Direction.DIAGONAL_UPLEFT && yPos <= Dimensions.getYMap()) ||
+                (direction == Direction.DIAGONAL_UPRIGHT && yPos <= Dimensions.getYMap()) ||
+                //bottom wall
                 (direction == Direction.DOWN && yPos == Dimensions.getBottomEdge()) ||
+                (direction == Direction.DIAGONAL_DOWNLEFT && yPos == Dimensions.getBottomEdge())||
+                (direction == Direction.DIAGONAL_DOWNRIGHT && yPos == Dimensions.getBottomEdge()) ||
+                //left wall
                 (direction == Direction.LEFT && xPos == Dimensions.getXMap()) ||
-                (direction == Direction.RIGHT && xPos == Dimensions.getRightEdge());
-        /*switch (direction) {
-            case UP:
-                if(yPos - distance < Dimensions.getYMap()) {
-                    return true;
-                }
-                break;
-            case DOWN:
-                if(yPos + distance + getHeight() > Dimensions.getBottomEdge()) {
-                    return true;
-                }
-                break;
-            case LEFT:
-                if(xPos - distance < Dimensions.getXMap()) {
-                    return true;
-                }
-                break;
-            case RIGHT:
-                if(xPos + distance + getWidth() > Dimensions.getRightEdge()) {
-                    return true;
-                }
-                break;
-            default:
-                System.out.println("No direction provided");
-            }
-        return false;*/
+                (direction == Direction.DIAGONAL_DOWNLEFT && xPos == Dimensions.getXMap()) ||
+                (direction == Direction.DIAGONAL_UPLEFT && xPos == Dimensions.getXMap()) ||
+                //right wall
+                (direction == Direction.RIGHT && xPos == Dimensions.getRightEdge()) ||
+                (direction == Direction.DIAGONAL_DOWNRIGHT && xPos == Dimensions.getRightEdge()) ||
+                (direction == Direction.DIAGONAL_UPRIGHT && xPos == Dimensions.getRightEdge());
+
     }
 
     public boolean areEqual(Position target){

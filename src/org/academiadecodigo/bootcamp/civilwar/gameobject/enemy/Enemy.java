@@ -77,20 +77,7 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     }
 
     public Direction chooseDirection() {
-        /*int rand = Randomizer.getRandomWithMax(4);
-        switch (rand) {
-            case 1:
-                return Direction.UP;
-            case 2:
-                return Direction.DOWN;
-            case 3:
-                return Direction.LEFT;
-            case 4:
-                return Direction.RIGHT;
-            default:
-                System.out.println("Error in direction choosing");
-        }
-        return null;*/
+
         Direction newDirection = currentDirection;
         if(Math.random() > (double) changeDirectionLevel / 10){
             newDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
