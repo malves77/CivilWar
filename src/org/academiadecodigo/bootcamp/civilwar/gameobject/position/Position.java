@@ -17,8 +17,8 @@ public class Position implements PositionInterface {
         /**
          * Constructor for enemies
          */
-        this.width = 10;
-        this.height = 10;
+        this.width = 20;
+        this.height = 20;
 
         this.xPos = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getMapWidth() + Dimensions.getXMap() - getWidth());
         this.yPos = Randomizer.getRandomInRange(Dimensions.getYMap(), Dimensions.getMapHeight() + Dimensions.getYMap() - getHeight());
@@ -32,8 +32,8 @@ public class Position implements PositionInterface {
          */
         this.xPos = xPos;
         this.yPos = yPos;
-        this.width = 10;
-        this.height = 10;
+        this.width = 20;
+        this.height = 20;
 
     }
 

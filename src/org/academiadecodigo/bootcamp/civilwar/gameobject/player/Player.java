@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject.player;
 
+import org.academiadecodigo.bootcamp.civilwar.GameTimer;
 import org.academiadecodigo.bootcamp.civilwar.MyKeyboard;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyable;
@@ -20,6 +21,9 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private Position myPos;
     private Rectangle rect;
     private int size;
+    boolean canFire = true;
+
+    private GameTimer attackTimer ;
 
     private MyKeyboard keyboard;
 
@@ -35,6 +39,8 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         //this.myPos.show();
         this.keyboard = keyboard;
         this.direction = Direction.LEFT;
+        attackTimer = new GameTimer(300000);
+        attackTimer.start();
 
     }
 
@@ -45,7 +51,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         int oldY = myPos.getY();
 
         if(choosePlayerDir(keysPressed) != null) {
-            System.out.println("Moving");
+            //System.out.println("Moving");
 
             this.direction = choosePlayerDir(keysPressed);
 
@@ -98,7 +104,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                         case 3:
                             dir = Direction.DIAGONAL_UPRIGHT;
                         default:
-                            System.out.println("Some ERROR AS OCCURED!");
+                            //System.out.println("Some ERROR HAS OCCURRED!");
                     }
                     break;
                 case 1:
@@ -109,7 +115,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                         case 3:
                             dir = Direction.DIAGONAL_DOWNRIGHT;
                         default:
-                            System.out.println("Some ERROR AS OCCURED!");
+                            //System.out.println("Some ERROR HAS OCCURRED!");
                     }
                     break;
                 case 2:
@@ -121,7 +127,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                             dir = Direction.DIAGONAL_DOWNLEFT;
                             break;
                         default:
-                            System.out.println("Some ERROR AS OCCURED!");
+                            //System.out.println("Some ERROR HAS OCCURRED!");
                     }
                     break;
                 case 3:
@@ -133,25 +139,37 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                             dir = Direction.DIAGONAL_DOWNRIGHT;
                             break;
                         default:
-                            System.out.println("Some ERROR AS OCCURED!");
+                            //System.out.println("Some ERROR HAS OCCURRED!");
                     }
                     break;
                 default:
-                    System.out.println("Some ERROR AS OCCURED!");
+                    //System.out.println("Some ERROR HAS OCCURRED!");
             }
         }
         return dir;
     }
 
-    public void attack(){
+    public void attack() {
 
-        if(!(shotsFired == weapons.length)){
-            System.out.println("fired " + shotsFired + " shots");
-            weapons[shotsFired].setFired();
-            weapons[shotsFired].move(new Position(myPos.getX(), myPos.getY()), this.direction);
-            shotsFired++;
+       /* if(attackTimer.getFinished()){
+            canFire = true;
+            attackTimer.resetCounter();
         }
 
+        if(keyboard.getKeysPressed()[4] && canFire){
+
+            if(!(shotsFired == weapons.length) ){
+
+
+                attackTimer.startCounting();
+
+                canFire = false;
+                System.out.println("fired " + shotsFired + " shots");
+                weapons[shotsFired].setFired();
+                weapons[shotsFired].move(new Position(myPos.getX(), myPos.getY()), this.direction);
+                shotsFired++;
+            }
+        }*/
     }
 
     /**

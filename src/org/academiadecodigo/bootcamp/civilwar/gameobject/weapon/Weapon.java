@@ -57,7 +57,7 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
 
         int oldX = myPos.getX();
         int oldY = myPos.getY();
-        System.out.println("Moving weapon");
+        //System.out.println("Moving weapon");
         for (int speed = 0; speed < this.speed; speed++) {
             myPos.moveInDirection(currentDirection, 1);
             if(myPos.isEdge(currentDirection)){
