@@ -1,23 +1,28 @@
 package org.academiadecodigo.bootcamp.civilwar;
 
-public class GameTimer extends Thread{
+//import java.util.TimerTask;
 
+public class GameTimer implements Runnable{
+
+    private Thread currentThread;
     private long counter;
     private long maxTime;
     private boolean hasFinished;
 
-    public GameTimer(long maxTime){
+    public GameTimer(long maxTime) {
         counter = 0;
         this.maxTime = maxTime;
         hasFinished = false;
+        currentThread = new Thread(this);
     }
 
+    /*
     public void startCounting() {
         resetCounter();
         long initialTime = System.currentTimeMillis();
         long currentTime;
 
-        while(counter <= maxTime){
+        while (counter <= maxTime) {
             currentTime = System.currentTimeMillis();
             counter += currentTime - initialTime;
             System.out.println(counter);
@@ -26,17 +31,28 @@ public class GameTimer extends Thread{
 
     }
 
-    public void resetCounter(){
+    public void resetCounter() {
         counter = 0;
         hasFinished = false;
     }
-
+    */
     @Override
     public void run() {
-        System.out.println("running");
+        this.hasFinished = completeTask(maxTime);
     }
 
-    public boolean getFinished(){
+    private boolean completeTask(long maxTime) {
+        try {
+            currentThread.sleep(maxTime);
+            return true;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean getFinished() {
         return hasFinished;
     }
+
 }

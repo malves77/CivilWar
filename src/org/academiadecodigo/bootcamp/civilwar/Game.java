@@ -72,7 +72,7 @@ public class Game {
 
         while(true){
 
-            Thread.sleep(50);
+            Thread.sleep(10);
             for(GameObject enemy : gameObjects) {
                 if(enemy instanceof Enemy){
                     Enemy enem = (Enemy) enemy;
@@ -87,6 +87,7 @@ public class Game {
                 }
             }
             player1.move();
+            player1.attack();
 
             player1.attack();
         }
