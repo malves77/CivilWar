@@ -178,15 +178,11 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         //System.out.println("Called Attack!");
         //attackTimer.run();
 
-        if(!canFire)
-            System.out.println("Cannot fire yet!");
 
         if(keyboard.getKeysPressed()[4] && canFire){
-            System.out.println("KeyPressed and I can fire!");
             if(!(shotsFired == weapons.length) ){
                 //attackTimer.startCounting();
                 canFire = false;
-                System.out.println("fired " + shotsFired + " shots");
                 weapons[shotsFired].setFired();
                 weapons[shotsFired].move(new Position(myPos.getX(), myPos.getY()), this.direction);
                 shotsFired++;

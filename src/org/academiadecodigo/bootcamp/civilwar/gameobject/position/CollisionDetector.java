@@ -9,43 +9,46 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
     private Enemy[] enemies;
     private Weapon[] weapons;
 
-    public CollisionDetector(Enemy[] gameObjects, Weapon[] weapons){
+    public CollisionDetector(Enemy[] gameObjects, Weapon[] weapons) {
         this.enemies = gameObjects;
         this.weapons = weapons;
     }
 
-    public void enemyCollision(Enemy enemy){
-        for(Enemy go : enemies) {
+    public void enemyCollision(Enemy enemy) {
+        for (Enemy anotherEnemy : enemies) {
 
-                if(enemy == go){
-                    continue;
-                }
-                int enemyX = enemy.getPosition().getX();
-                int enemyXWidth = enemyX + enemy.getPosition().getWidth();
-                int enemyY = enemy.getPosition().getY();
-                int enemyYHeight = enemyY + enemy.getPosition().getHeight();
+            if (enemy == anotherEnemy || anotherEnemy.isDestroyed()) {
+                continue;
+            }
+            int enemyX = enemy.getPosition().getX();
+            int enemyXWidth = enemyX + enemy.getPosition().getWidth();
+            int enemyY = enemy.getPosition().getY();
+            int enemyYHeight = enemyY + enemy.getPosition().getHeight();
 
-                int goX = go.getPosition().getX();
-                int goXWidth = goX + go.getPosition().getWidth();
-                int goY = go.getPosition().getY();
-                int goYHeight = goY + go.getPosition().getHeight();
+            int goX = anotherEnemy.getPosition().getX();
+            int goXWidth = goX + anotherEnemy.getPosition().getWidth();
+            int goY = anotherEnemy.getPosition().getY();
+            int goYHeight = goY + anotherEnemy.getPosition().getHeight();
 
-                if(
-                        enemyX <= goXWidth &&
-                        enemyXWidth >= goX &&
-                        enemyY <= goYHeight &&
-                        enemyYHeight >= goY
+            if (
+                    enemyX <= goXWidth &&
+                            enemyXWidth >= goX &&
+                            enemyY <= goYHeight &&
+                            enemyYHeight >= goY
 
-                ){
-                    System.out.println("collided!!!!");
-                    enemy.setOppositeDirection();
-                    go.setOppositeDirection();
-                }
+            ) {
+                //System.out.println("collided!!!!");
+                enemy.setOppositeDirection();
+                anotherEnemy.setOppositeDirection();
+            }
         }
     }
 
     public int weaponCollision(Weapon weapon) {
         for (Enemy enemy : enemies) {
+            if (weapon.isDestroyed() || enemy.isDestroyed()) {
+                continue;
+            }
 
             int enemyX = enemy.getPosition().getX();
             int enemyXWidth = enemyX + enemy.getPosition().getWidth();
@@ -64,8 +67,7 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
                             enemyYHeight >= weaponY) {
                 weapon.setDestroyed();
                 enemy.hit(weapon.getDamage());
-                System.out.println(enemy.getHealth());
-                if(enemy.isDestroyed()){
+                if (enemy.isDestroyed()) {
                     return 1;
                 }
             }

@@ -182,17 +182,17 @@ public class Position implements PositionInterface {
                 (direction == Direction.DIAGONAL_UPLEFT && yPos <= Dimensions.getYMap()) ||
                 (direction == Direction.DIAGONAL_UPRIGHT && yPos <= Dimensions.getYMap()) ||
                 //bottom wall
-                (direction == Direction.DOWN && yPos == Dimensions.getBottomEdge()) ||
-                (direction == Direction.DIAGONAL_DOWNLEFT && yPos == Dimensions.getBottomEdge())||
-                (direction == Direction.DIAGONAL_DOWNRIGHT && yPos == Dimensions.getBottomEdge()) ||
+                (direction == Direction.DOWN && yPos + height == Dimensions.getBottomEdge()) ||
+                (direction == Direction.DIAGONAL_DOWNLEFT && yPos + height == Dimensions.getBottomEdge())||
+                (direction == Direction.DIAGONAL_DOWNRIGHT && yPos + height == Dimensions.getBottomEdge()) ||
                 //left wall
                 (direction == Direction.LEFT && xPos == Dimensions.getXMap()) ||
                 (direction == Direction.DIAGONAL_DOWNLEFT && xPos == Dimensions.getXMap()) ||
                 (direction == Direction.DIAGONAL_UPLEFT && xPos == Dimensions.getXMap()) ||
                 //right wall
-                (direction == Direction.RIGHT && xPos == Dimensions.getRightEdge()) ||
-                (direction == Direction.DIAGONAL_DOWNRIGHT && xPos == Dimensions.getRightEdge()) ||
-                (direction == Direction.DIAGONAL_UPRIGHT && xPos == Dimensions.getRightEdge());
+                (direction == Direction.RIGHT && xPos + width == Dimensions.getRightEdge()) ||
+                (direction == Direction.DIAGONAL_DOWNRIGHT && xPos + width == Dimensions.getRightEdge()) ||
+                (direction == Direction.DIAGONAL_UPRIGHT && xPos + width == Dimensions.getRightEdge());
 
     }
 

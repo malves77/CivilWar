@@ -45,6 +45,11 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     }
 
     public void move() {
+        if(isDestroyed()){
+            return;
+        }
+
+
         int oldX = myPos.getX();
         int oldY = myPos.getY();
 
@@ -58,9 +63,6 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     }
 
     private void accelerate(Direction direction){
-        if(isDestroyed()){
-            return;
-        }
         Direction newDirection = direction;
         if(getPosition().isEdge(direction) && newDirection.equals(currentDirection)){
             newDirection = chooseDirection();
@@ -87,14 +89,22 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
         }
         return newDirection;
     }
+    public void setDestroyed(){
+        destroyed = true;
+        rect.delete();
+    }
 
     public boolean isDestroyed() {
         return destroyed;
     }
 
     public void hit(int damage) {
-
-        health -= damage;
+        if (health - damage > 0) {
+            health -= damage;
+        } else {
+            health = 0;
+            setDestroyed();
+        }
     }
 
     public int getHealth() {
