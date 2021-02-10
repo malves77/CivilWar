@@ -21,13 +21,15 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private Position myPos;
     private Rectangle rect;
     private int size;
-    boolean canFire = true;
+    private boolean canFire = true;
+    private int reloadTime;
 
-    private GameTimer attackTimer ;
+    //private GameTimer attackTimer;
+    //private GameTimer attackTimer;
 
     private MyKeyboard keyboard;
 
-    public Player(Position myPos, Weapon[] weapons, MyKeyboard keyboard){
+    public Player(Position myPos, Weapon[] weapons, MyKeyboard keyboard) {
         super(myPos);
         this.health = 10;
         this.speed = 5;
@@ -39,18 +41,26 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         //this.myPos.show();
         this.keyboard = keyboard;
         this.direction = Direction.LEFT;
-        attackTimer = new GameTimer(300000);
-        attackTimer.start();
 
+        reloadTime = 1000;
+        //newTimer();
+        //attackTimer = new GameTimer(300000);
+        //attackTimer.start();
     }
 
-    public void move(/*Direction direction*/){
+    /*
+    public void behaviour() {
+        move();
+        attack();
+    }
+    */
+    public void move(/*Direction direction*/) {
         boolean keysPressed[] = keyboard.getKeysPressed();
 
         int oldX = myPos.getX();
         int oldY = myPos.getY();
 
-        if(choosePlayerDir(keysPressed) != null) {
+        if (choosePlayerDir(keysPressed) != null) {
             //System.out.println("Moving");
 
             this.direction = choosePlayerDir(keysPressed);
@@ -68,8 +78,8 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         Direction dir = null;
         int key1 = -1;
         int key2 = -1;
-        for(int i = 0; i < keysPressed.length; i++) {
-            if(keysPressed[i]) {
+        for (int i = 0; i < keysPressed.length; i++) {
+            if (keysPressed[i]) {
                 if (key1 < 0) {
                     key1 = i;
                 } else if (key2 < 0) {
@@ -80,7 +90,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                 }
             }
         }
-        if(key2 < 0) {
+        if (key2 < 0) {
             switch (key1) {
                 case 0:
                     dir = Direction.UP;
@@ -95,7 +105,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                     dir = Direction.RIGHT;
             }
         } else {
-            switch(key1) {
+            switch (key1) {
                 case 0:
                     switch (key2) {
                         case 2:
@@ -149,27 +159,53 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         return dir;
     }
 
-    public void attack() {
+    /*
+    private void newTimer() {
+        attackTimer = new GameTimer(reloadTime);
+    }
 
+     */
+
+
+    public void attack() {
        /* if(attackTimer.getFinished()){
             canFire = true;
             attackTimer.resetCounter();
         }
+        */
+        //System.out.println("Called Attack!");
+        //attackTimer.run();
+
+        if(!canFire)
+            System.out.println("Cannot fire yet!");
 
         if(keyboard.getKeysPressed()[4] && canFire){
-
+            System.out.println("KeyPressed and I can fire!");
             if(!(shotsFired == weapons.length) ){
-
-
-                attackTimer.startCounting();
-
+                //attackTimer.startCounting();
                 canFire = false;
                 System.out.println("fired " + shotsFired + " shots");
                 weapons[shotsFired].setFired();
                 weapons[shotsFired].move(new Position(myPos.getX(), myPos.getY()), this.direction);
                 shotsFired++;
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                canFire = true;
+                            }
+                        },
+                        reloadTime
+                );
             }
-        }*/
+        }
+        /*
+        if(attackTimer.getFinished()) {
+            canFire = true;
+            System.out.println("Can Shoot again!");
+            newTimer();
+        }
+        */
     }
 
     /**
@@ -177,27 +213,27 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
      */
     public void resetShotsFired() {
         shotsFired = 0;
-        for(Weapon weapon : weapons) {
+        for (Weapon weapon : weapons) {
             weapon.respawn();
         }
     }
 
-    public boolean isDestroyed(){
+    public boolean isDestroyed() {
         return destroyed;
     }
 
-    public void hit(int damage){
-        if(!isDestroyed()){
+    public void hit(int damage) {
+        if (!isDestroyed()) {
             health -= damage;
         }
 
-        if(health <= 0) {
+        if (health <= 0) {
             health = 0;
             setDestroyed();
         }
     }
 
-    private void setDestroyed(){
+    private void setDestroyed() {
         destroyed = true;
     }
 
@@ -205,9 +241,8 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         return direction;
     }
 
-    public void show(){
+    public void show() {
         rect.setColor(Color.WHITE);
         rect.fill();
-
     }
 }

@@ -42,7 +42,7 @@ public class Game {
         }
 
         //creates weapons
-        Weapon[] weapons = new Weapon[4];
+        Weapon[] weapons = new Weapon[10];
         for(int i = 0; i < weapons.length; i++){
             weapons[i] = new Weapon(WeaponType.FRANCESINHA);
         }
@@ -65,7 +65,7 @@ public class Game {
 
         while(true){
 
-            Thread.sleep(50);
+            Thread.sleep(10);
             for(GameObject enemy : gameObjects) {
                 if(enemy instanceof Enemy){
                     Enemy enem = (Enemy) enemy;
@@ -78,6 +78,7 @@ public class Game {
                 }
             }
             player1.move();
+            player1.attack();
 
         }
 

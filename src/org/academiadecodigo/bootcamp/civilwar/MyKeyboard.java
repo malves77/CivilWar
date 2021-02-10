@@ -108,22 +108,22 @@ public class MyKeyboard implements KeyboardHandler {
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_UP){
             //if(keyboardEvent.getKey() == keyboard.)
             keysPressed[0] = true;
-            System.out.println("Up Pressed");
+            //System.out.println("Up Pressed");
             //player.move(Direction.UP);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN){
             keysPressed[1] = true;
-            System.out.println("Down Pressed");
+            //System.out.println("Down Pressed");
             //player.move(Direction.DOWN);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT){
             keysPressed[2] = true;
-            System.out.println("Left Pressed");
+            //System.out.println("Left Pressed");
             //player.move(Direction.LEFT);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT){
             keysPressed[3] = true;
-            System.out.println("Right Pressed");
+            //System.out.println("Right Pressed");
             //player.move(Direction.RIGHT);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
@@ -136,24 +136,24 @@ public class MyKeyboard implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent){
 
-        System.out.println("Key Released!");
+        //System.out.println("Key Released!");
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_UP){
             keysPressed[0] = false;
             //player.move(Direction.UP);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN){
-            System.out.println("Down Released");
+            //System.out.println("Down Released");
             keysPressed[1] = false;
             //player.move(Direction.DOWN);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT){
-            System.out.println("Left Released");
+            //System.out.println("Left Released");
             keysPressed[2] = false;
             //player.move(Direction.LEFT);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT){
-            System.out.println("Right Released");
+            //System.out.println("Right Released");
             keysPressed[3] = false;
             //player.move(Direction.RIGHT);
         }
