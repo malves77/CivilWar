@@ -25,6 +25,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private boolean canFire = true;
     private int reloadTime;
 
+
     //private GameTimer attackTimer;
     //private GameTimer attackTimer;
 
@@ -45,18 +46,11 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         this.direction = Direction.LEFT;
 
         reloadTime = 1000;
-        //newTimer();
-        //attackTimer = new GameTimer(300000);
-        //attackTimer.start();
+
     }
 
-    /*
-    public void behaviour() {
-        move();
-        attack();
-    }
-    */
-    public void move(/*Direction direction*/) {
+
+    public void move() {
         boolean keysPressed[] = keyboard.getKeysPressed();
 
         int oldX = myPos.getX();
@@ -80,7 +74,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         Direction dir = null;
         int key1 = -1;
         int key2 = -1;
-        for (int i = 0; i < keysPressed.length; i++) {
+        for (int i = 0; i < keysPressed.length - 1; i++) {
             if (keysPressed[i]) {
                 if (key1 < 0) {
                     key1 = i;
@@ -161,26 +155,14 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         return dir;
     }
 
-    /*
-    private void newTimer() {
-        attackTimer = new GameTimer(reloadTime);
-    }
-
-     */
 
 
     public void attack() {
-       /* if(attackTimer.getFinished()){
-            canFire = true;
-            attackTimer.resetCounter();
-        }
-        */
-        //System.out.println("Called Attack!");
-        //attackTimer.run();
 
 
-        if(keyboard.getKeysPressed()[4] && canFire){
-            if(!(shotsFired == weapons.length) ){
+
+        if (keyboard.getKeysPressed()[4] && canFire) {
+            if (!(shotsFired == weapons.length)) {
                 //attackTimer.startCounting();
                 canFire = false;
                 weapons[shotsFired].setFired();
@@ -197,13 +179,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                 );
             }
         }
-        /*
-        if(attackTimer.getFinished()) {
-            canFire = true;
-            System.out.println("Can Shoot again!");
-            newTimer();
-        }
-        */
+
     }
 
     /**
@@ -235,16 +211,16 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         destroyed = true;
     }
 
-    public Direction getDirection() {
-        return direction;
-    }
 
     public void show() {
         rect.setColor(Color.WHITE);
         rect.fill();
     }
 
-    public void updateScore(int enemyValue){
+    public void updateScore(int enemyValue) {
         score += enemyValue;
+    }
+    public int getScore (){
+        return score;
     }
 }

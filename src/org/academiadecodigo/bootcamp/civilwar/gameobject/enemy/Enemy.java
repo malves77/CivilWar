@@ -26,7 +26,7 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
         destroyed = false;
         this.myPos = myPos;
         this.speed = speed;
-        health = 20;
+        health = 1;
         size = 20;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
         rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
@@ -101,9 +101,12 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     public void hit(int damage) {
         if (health - damage > 0) {
             health -= damage;
+            System.out.println("Damage taken");
+            System.out.println(getHealth());
         } else {
             health = 0;
             setDestroyed();
+            System.out.println("destroyed");
         }
     }
 

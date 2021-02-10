@@ -21,13 +21,15 @@ public class Game {
     //private GameObject = new GameObject();
     Player player1;
     CollisionDetector collisionDetector;
+    Screen screen;
 
 
     public void init() throws InterruptedException {
 
         //creates screen
-        Screen screen = new Screen();
+        screen = new Screen();
         screen.show();
+        screen.displayScore(0);
 
         //creates map
         Map map = new Map();
@@ -35,13 +37,13 @@ public class Game {
 
 
         //creates enemies
-        Enemy[] enemies = new Enemy[10];
+        Enemy[] enemies = new Enemy[2];
 
         for (int i = 0; i < enemies.length; i++){
             int x = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getRightEdge());
             int y = Randomizer.getRandomInRange(Dimensions.getYMap(), Dimensions.getBottomEdge());
             Position pos = new Position(x, y);
-            enemies[i] = new Enemy(pos, 5, 20);
+            enemies[i] = new Enemy(pos, 5, 2);
             System.out.println("New enemy created");
         }
 
@@ -84,6 +86,8 @@ public class Game {
                 if(weapon.getFired()){
                     weapon.accelerate();
                     player1.updateScore(collisionDetector.weaponCollision(weapon));
+                    screen.displayScore(player1.getScore());
+                    System.out.println(player1.getScore());
                 }
             }
             player1.move();

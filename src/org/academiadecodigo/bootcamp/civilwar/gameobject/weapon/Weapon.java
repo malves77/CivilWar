@@ -44,6 +44,9 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
 
     public void move(Position pos, Direction direction) {
         //atribuir
+        if (isDestroyed()){
+            return;
+        }
         this.myPos = pos;
         currentDirection = direction;
         show();
