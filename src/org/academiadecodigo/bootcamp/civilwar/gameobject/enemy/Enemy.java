@@ -88,6 +88,7 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     public boolean isDestroyed() {
 
         if(getHealth() <= 0) {
+            rect.delete();
             return true;
         }
         return false;

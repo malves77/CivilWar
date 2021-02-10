@@ -35,7 +35,7 @@ public class Game {
 
 
         //creates enemies
-        Enemy[] enemies = new Enemy[10];
+        Enemy[] enemies = new Enemy[1];
 
         for (int i = 0; i < enemies.length; i++){
             int x = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getRightEdge());
@@ -72,7 +72,7 @@ public class Game {
 
         while(true){
 
-            Thread.sleep(10);
+            Thread.sleep(50);
             for(GameObject enemy : gameObjects) {
                 if(enemy instanceof Enemy){
                     Enemy enem = (Enemy) enemy;

@@ -64,6 +64,7 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
                             enemyYHeight >= weaponY) {
                 weapon.setDestroyed();
                 enemy.hit(weapon.getDamage());
+                System.out.println(enemy.getHealth());
                 if(enemy.isDestroyed()){
                     return 1;
                 }

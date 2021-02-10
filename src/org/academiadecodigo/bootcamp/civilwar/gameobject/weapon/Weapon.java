@@ -21,6 +21,7 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
     private boolean fired;
 
     public Weapon( WeaponType type) {
+        this.damage = type.getDamage();
         destroyed = false;
         this.type = type;
         this.speed = 20;
