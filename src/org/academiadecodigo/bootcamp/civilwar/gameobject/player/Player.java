@@ -12,6 +12,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Player extends GameObject implements PlayerInterface, Destroyable {
 
+    private int score;
     private boolean destroyed = false;
     private int health;
     private final int speed;
@@ -29,6 +30,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
 
     public Player(Position myPos, Weapon[] weapons, MyKeyboard keyboard){
         super(myPos);
+        this.score = 0;
         this.health = 10;
         this.speed = 5;
         this.weapons = weapons;
@@ -208,6 +210,9 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     public void show(){
         rect.setColor(Color.WHITE);
         rect.fill();
+    }
 
+    public void updateScore(int enemyValue){
+        score += enemyValue;
     }
 }

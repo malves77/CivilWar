@@ -104,4 +104,8 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     public Position getPosition(){
         return myPos;
     }
+
+    public void setOppositeDirection(){
+        currentDirection = currentDirection.getOpposite();
+    }
 }

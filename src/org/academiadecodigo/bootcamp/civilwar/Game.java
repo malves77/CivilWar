@@ -7,6 +7,7 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.Map;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.ObjectFactory;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.enemy.Enemy;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.player.Player;
+import org.academiadecodigo.bootcamp.civilwar.gameobject.position.CollisionDetector;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.Weapon;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.WeaponType;
@@ -19,6 +20,7 @@ public class Game {
 
     //private GameObject = new GameObject();
     Player player1;
+    CollisionDetector collisionDetector;
 
 
     public void init() throws InterruptedException {
@@ -33,16 +35,18 @@ public class Game {
 
 
         //creates enemies
-        GameObject enemies[] = new GameObject[4];
+        Enemy[] enemies = new Enemy[10];
 
         for (int i = 0; i < enemies.length; i++){
-            Position pos = new Position(20, 20);
+            int x = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getRightEdge());
+            int y = Randomizer.getRandomInRange(Dimensions.getYMap(), Dimensions.getBottomEdge());
+            Position pos = new Position(x, y);
             enemies[i] = new Enemy(pos, 5, 20);
             System.out.println("New enemy created");
         }
 
         //creates weapons
-        Weapon[] weapons = new Weapon[4];
+        Weapon[] weapons = new Weapon[60];
         for(int i = 0; i < weapons.length; i++){
             weapons[i] = new Weapon(WeaponType.FRANCESINHA);
         }
@@ -57,6 +61,9 @@ public class Game {
 
         player1.show();
 
+        //Collision detector
+        collisionDetector = new CollisionDetector(enemies, weapons);
+
         start(enemies, weapons);
 
     }
@@ -70,15 +77,18 @@ public class Game {
                 if(enemy instanceof Enemy){
                     Enemy enem = (Enemy) enemy;
                     enem.move();
+                    collisionDetector.enemyCollision(enem);
                 }
             }
             for(Weapon weapon : weapons) {
                 if(weapon.getFired()){
                     weapon.accelerate();
+                    player1.updateScore(collisionDetector.weaponCollision(weapon));
                 }
             }
             player1.move();
 
+            player1.attack();
         }
 
 
