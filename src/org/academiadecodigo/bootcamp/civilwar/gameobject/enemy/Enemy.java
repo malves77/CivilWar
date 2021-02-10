@@ -19,9 +19,11 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     private Direction currentDirection;
     private int changeDirectionLevel = 8;
     private int health;
+    private boolean destroyed;
 
     public Enemy(Position myPos, int speed) {
         super(myPos);
+        destroyed = false;
         this.myPos = myPos;
         this.speed = speed;
         health = 20;
@@ -33,6 +35,7 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
 
     public Enemy(Position myPos, int speed, int health) {
         super(myPos);
+        destroyed = false;
         this.myPos = myPos;
         this.speed = speed;
         this.health = health;
@@ -86,15 +89,11 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     }
 
     public boolean isDestroyed() {
-
-        if(getHealth() <= 0) {
-            rect.delete();
-            return true;
-        }
-        return false;
+        return destroyed;
     }
 
     public void hit(int damage) {
+
         health -= damage;
     }
 

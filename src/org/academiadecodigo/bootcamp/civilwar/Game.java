@@ -35,7 +35,7 @@ public class Game {
 
 
         //creates enemies
-        Enemy[] enemies = new Enemy[1];
+        Enemy[] enemies = new Enemy[10];
 
         for (int i = 0; i < enemies.length; i++){
             int x = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getRightEdge());
