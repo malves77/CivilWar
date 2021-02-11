@@ -92,10 +92,6 @@ public class Game {
             player1.move();
             collisionDetector.playerEnemyCollision(player1);
             player1.attack();
-
-            player1.attack();
         }
-
-
     }
 }
