@@ -157,8 +157,6 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
 
     public void attack() {
 
-
-
         if (keyboard.getKeysPressed()[4] && canFire) {
             if (!(shotsFired == weapons.length)) {
                 //attackTimer.startCounting();

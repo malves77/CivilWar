@@ -11,7 +11,6 @@ public class Position implements PositionInterface {
     private int yPos;
     private int width;
     private int height;
-    private Rectangle rect;
 
     public Position(){
         /**
@@ -20,8 +19,8 @@ public class Position implements PositionInterface {
         this.width = 20;
         this.height = 20;
 
-        this.xPos = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getMapWidth() + Dimensions.getXMap() - getWidth());
-        this.yPos = Randomizer.getRandomInRange(Dimensions.getYMap(), Dimensions.getMapHeight() + Dimensions.getYMap() - getHeight());
+        this.xPos = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getMapWidth()/2 + Dimensions.getXMap() - getWidth());
+        this.yPos = Randomizer.getRandomInRange(Dimensions.getYMap(), Dimensions.getMapHeight()/2 + Dimensions.getYMap() - getHeight());
 
     }
 

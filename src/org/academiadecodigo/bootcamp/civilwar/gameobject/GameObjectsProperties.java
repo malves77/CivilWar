@@ -1,5 +1,7 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject;
 
+import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
+
 public class GameObjectsProperties {
 
 

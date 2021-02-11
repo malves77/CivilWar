@@ -34,21 +34,11 @@ public class Game {
 
 
         //creates enemies
-        Enemy[] enemies = new Enemy[GameObjectsProperties.TOTAL_ENEMIES];
+        Enemy[] enemies = ObjectFactory.enemyFactory(GameObjectsProperties.TOTAL_ENEMIES);
 
-        for (int i = 0; i < enemies.length; i++){
-            int x = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getRightEdge());
-            int y = Randomizer.getRandomInRange(Dimensions.getYMap(), Dimensions.getBottomEdge());
-            Position pos = new Position(x, y);
-            enemies[i] = new Enemy(pos, GameObjectsProperties.ENEMY_SPEED, GameObjectsProperties.ENEMY_HEALTH);
-            System.out.println("New enemy created");
-        }
 
         //creates weapons
-        Weapon[] weapons = new Weapon[GameObjectsProperties.TOTAL_WEAPONS];
-        for(int i = 0; i < weapons.length; i++){
-            weapons[i] = new Weapon(WeaponType.FRANCESINHA);
-        }
+        Weapon[] weapons = ObjectFactory.weaponsFactory(GameObjectsProperties.TOTAL_WEAPONS);
 
 
 
