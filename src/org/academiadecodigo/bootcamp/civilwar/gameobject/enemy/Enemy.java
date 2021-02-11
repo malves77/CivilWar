@@ -20,6 +20,7 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     private int changeDirectionLevel = 8;
     private int health;
     private boolean destroyed;
+    private int power = 5;
 
     public Enemy(Position myPos, int speed) {
         super(myPos);
@@ -120,5 +121,9 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
 
     public void setOppositeDirection(){
         currentDirection = currentDirection.getOpposite();
+    }
+
+    public int getPower(){
+        return power;
     }
 }

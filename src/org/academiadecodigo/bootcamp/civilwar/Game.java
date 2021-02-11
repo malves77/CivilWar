@@ -90,7 +90,10 @@ public class Game {
                     System.out.println(player1.getScore());
                 }
             }
+
+
             player1.move();
+            collisionDetector.playerEnemyCollision(player1);
             player1.attack();
 
             player1.attack();

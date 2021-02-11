@@ -2,6 +2,7 @@ package org.academiadecodigo.bootcamp.civilwar.gameobject.position;
 
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.enemy.Enemy;
+import org.academiadecodigo.bootcamp.civilwar.gameobject.player.Player;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.Weapon;
 
 public class CollisionDetector /*implements CollisionDetectorInterface*/ {
@@ -74,4 +75,37 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
         }
         return 0;
     }
+
+    public void playerEnemyCollision(Player player){
+
+        for (Enemy enemy : enemies) {
+            if (player.isDestroyed() || enemy.isDestroyed()) {
+                continue;
+            }
+
+            int enemyX = enemy.getPosition().getX();
+            int enemyXWidth = enemyX + enemy.getPosition().getWidth();
+            int enemyY = enemy.getPosition().getY();
+            int enemyYHeight = enemyY + enemy.getPosition().getHeight();
+
+            int weaponX = player.getPosition().getX();
+            int weaponXWidth = weaponX + player.getPosition().getWidth();
+            int weaponY = player.getPosition().getY();
+            int weaponYHeight = weaponY + player.getPosition().getHeight();
+
+            if (
+                enemyX <= weaponXWidth &&
+                enemyXWidth >= weaponX &&
+                enemyY <= weaponYHeight &&
+                enemyYHeight >= weaponY
+            )
+            {
+                System.out.println("player was hit by enemy");
+                player.hit(enemy.getPower());
+
+            }
+        }
+
+    }
+
 }

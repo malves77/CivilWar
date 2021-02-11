@@ -1,6 +1,5 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject.player;
 
-import org.academiadecodigo.bootcamp.civilwar.GameTimer;
 import org.academiadecodigo.bootcamp.civilwar.MyKeyboard;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyable;
@@ -24,10 +23,6 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private int size;
     private boolean canFire = true;
     private int reloadTime;
-
-
-    //private GameTimer attackTimer;
-    //private GameTimer attackTimer;
 
     private MyKeyboard keyboard;
 
@@ -155,7 +150,9 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         return dir;
     }
 
-
+    public Position getPosition(){
+        return myPos;
+    }
 
     public void attack() {
 
@@ -197,16 +194,18 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     }
 
     public void hit(int damage) {
-        if (!isDestroyed()) {
-            health -= damage;
-        }
+        health -= damage;
 
         if (health <= 0) {
             health = 0;
             setDestroyed();
+            System.out.println("Game over");
         }
     }
 
+    /**
+     * @TODO implement game over
+     */
     private void setDestroyed() {
         destroyed = true;
     }
