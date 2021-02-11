@@ -1,14 +1,13 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject.enemy;
 
-import org.academiadecodigo.bootcamp.civilwar.Randomizer;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
+import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObjectsProperties;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyable;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Direction;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
-import java.awt.*;
 
 public class Enemy extends GameObject implements EnemyInterface, Destroyable {
 
@@ -17,18 +16,19 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     private int size;
     private Rectangle rect;
     private Direction currentDirection;
-    private int changeDirectionLevel = 8;
+    private int changeDirectionLevel = GameObjectsProperties.ENEMY_CHANGEDIRECTIONLEVEL;
     private int health;
     private boolean destroyed;
-    private int power = 5;
+    private int power;
 
     public Enemy(Position myPos, int speed) {
         super(myPos);
         destroyed = false;
         this.myPos = myPos;
-        this.speed = speed;
-        health = 1;
-        size = 20;
+        this.speed = GameObjectsProperties.ENEMY_SPEED;
+        power = GameObjectsProperties.ENEMY_POWER;
+        health = GameObjectsProperties.ENEMY_HEALTH;
+        size = GameObjectsProperties.ENEMY_SIZE;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
         rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
         //this.show();
@@ -39,8 +39,9 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
         destroyed = false;
         this.myPos = myPos;
         this.speed = speed;
+        power = GameObjectsProperties.ENEMY_POWER;
         this.health = health;
-        size = 20;
+        size = GameObjectsProperties.ENEMY_SIZE;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
         rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
     }

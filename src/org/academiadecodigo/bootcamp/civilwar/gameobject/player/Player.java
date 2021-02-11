@@ -2,6 +2,7 @@ package org.academiadecodigo.bootcamp.civilwar.gameobject.player;
 
 import org.academiadecodigo.bootcamp.civilwar.MyKeyboard;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
+import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObjectsProperties;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyable;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Direction;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
@@ -29,18 +30,18 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     public Player(Position myPos, Weapon[] weapons, MyKeyboard keyboard) {
         super(myPos);
         this.score = 0;
-        this.health = 10;
-        this.speed = 5;
+        this.health = GameObjectsProperties.PLAYER_HEALTH;
+        this.speed = GameObjectsProperties.PLAYER_SPEED;
         this.weapons = weapons;
         this.shotsFired = 0;
         this.myPos = myPos;
-        this.size = 20;
+        this.size = GameObjectsProperties.PLAYER_SIZE;
         this.rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
         //this.myPos.show();
         this.keyboard = keyboard;
         this.direction = Direction.LEFT;
 
-        reloadTime = 1000;
+        reloadTime = GameObjectsProperties.RELOAD_TIME;
 
     }
 

@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject.weapon;
 
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
+import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObjectsProperties;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyable;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.player.Player;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Direction;
@@ -24,7 +25,7 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
         this.damage = type.getDamage();
         destroyed = false;
         this.type = type;
-        this.speed = 20;
+        this.speed = GameObjectsProperties.WEAPON_SPEED;
         //currentDirection = player.getDirection();
     }
 
@@ -36,7 +37,6 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
     public boolean isDestroyed() {
         return destroyed;
     }
-
 
     public void hit(int damage) {
         setDestroyed();

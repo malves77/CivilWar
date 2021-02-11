@@ -1,10 +1,7 @@
 package org.academiadecodigo.bootcamp.civilwar;
 
 
-import org.academiadecodigo.bootcamp.civilwar.gameobject.Dimensions;
-import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
-import org.academiadecodigo.bootcamp.civilwar.gameobject.Map;
-import org.academiadecodigo.bootcamp.civilwar.gameobject.ObjectFactory;
+import org.academiadecodigo.bootcamp.civilwar.gameobject.*;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.enemy.Enemy;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.player.Player;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.CollisionDetector;
@@ -37,18 +34,18 @@ public class Game {
 
 
         //creates enemies
-        Enemy[] enemies = new Enemy[2];
+        Enemy[] enemies = new Enemy[GameObjectsProperties.TOTAL_ENEMIES];
 
         for (int i = 0; i < enemies.length; i++){
             int x = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getRightEdge());
             int y = Randomizer.getRandomInRange(Dimensions.getYMap(), Dimensions.getBottomEdge());
             Position pos = new Position(x, y);
-            enemies[i] = new Enemy(pos, 5, 2);
+            enemies[i] = new Enemy(pos, GameObjectsProperties.ENEMY_SPEED, GameObjectsProperties.ENEMY_HEALTH);
             System.out.println("New enemy created");
         }
 
         //creates weapons
-        Weapon[] weapons = new Weapon[60];
+        Weapon[] weapons = new Weapon[GameObjectsProperties.TOTAL_WEAPONS];
         for(int i = 0; i < weapons.length; i++){
             weapons[i] = new Weapon(WeaponType.FRANCESINHA);
         }
