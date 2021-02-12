@@ -11,6 +11,7 @@ public class GameObjectsProperties {
     public static final int PLAYER_SIZE = 64;
     public static final int PLAYER_SPEED = 5;
     public static final int PLAYER_HEALTH = 20;
+    public static final int PLAYER_PROTECTION_TIME = 2000;
     public static final int RELOAD_TIME = 1000;
 
     public static final int ENEMY_WIDTH = 20;

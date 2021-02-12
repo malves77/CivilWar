@@ -25,7 +25,9 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private Picture pic;
     private int size;
     private boolean canFire = true;
+    private boolean gotHit = false;
     private int reloadTime;
+    private int protectionTime;
 
     private MyKeyboard keyboard;
 
@@ -44,6 +46,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         this.keyboard = keyboard;
         this.direction = Direction.LEFT;
 
+        protectionTime = GameObjectsProperties.PLAYER_PROTECTION_TIME;
         reloadTime = GameObjectsProperties.RELOAD_TIME;
 
     }
@@ -199,6 +202,20 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     }
 
     public void hit(int damage) {
+        if(gotHit){
+            return;
+        }
+        //System.out.println("player really got hit");
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        gotHit = false;
+                    }
+                },
+                protectionTime
+        );
+
         health -= damage;
 
         if (health <= 0) {
@@ -206,6 +223,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
             setDestroyed();
             System.out.println("Game over");
         }
+        gotHit = true;
     }
 
     /**

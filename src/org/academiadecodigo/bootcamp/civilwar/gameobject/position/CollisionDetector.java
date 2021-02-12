@@ -100,7 +100,7 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
                 enemyYHeight >= weaponY
             )
             {
-                System.out.println("player was hit by enemy");
+                //System.out.println("player was hit by enemy");
                 player.hit(enemy.getPower());
 
             }
