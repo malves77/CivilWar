@@ -3,6 +3,7 @@ package org.academiadecodigo.bootcamp.civilwar.gameobject;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Map {
 
@@ -25,8 +26,10 @@ public class Map {
 
     public void show(){
         rect = new Rectangle( Dimensions.getXMap(), Dimensions.getYMap(), getWidth(), getHeight());
-        rect.setColor(Color.BLUE);
-        rect.fill();
+        rect.setColor(Color.BLACK);
+        Picture map = new Picture(Dimensions.getXMap(), Dimensions.getYMap(), "Mapextended.png");
+        map.draw();
+        rect.draw();
     }
 
     public int getX(){

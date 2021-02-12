@@ -4,6 +4,7 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.Dimensions;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Screen {
     private int x;
@@ -19,8 +20,8 @@ public class Screen {
         x = 0;
         y = 0;
         padding = 10;
-        width = Dimensions.getRightEdge();
-        height = Dimensions.getBottomEdge();
+        width = Dimensions.getScreenWidth();
+        height = Dimensions.getScreenHeight();
         rect = new Rectangle(x, y, width, height);
         objectScore = 0;
         textScore = new Text(40,30,objectScore.toString());
@@ -31,8 +32,10 @@ public class Screen {
     }
 
     public void show(){
-        rect.setColor(Color.WHITE);
+        rect.setColor(Color.ORANGE);
         rect.fill();
+        Picture background = new Picture(0, 0, "fundo800x600.png");
+        background.draw();
     }
 
     public void displayScore(int score) {

@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject.position;
 
 import org.academiadecodigo.bootcamp.civilwar.gameobject.Dimensions;
+import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObjectsProperties;
 import org.academiadecodigo.bootcamp.civilwar.Randomizer;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -17,8 +18,8 @@ public class Position implements PositionInterface {
         /**
          * Constructor for enemies
          */
-        this.width = 20;
-        this.height = 20;
+        this.width = GameObjectsProperties.ENEMY_SIZE;
+        this.height = GameObjectsProperties.ENEMY_SIZE;
 
         this.xPos = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getMapWidth() + Dimensions.getXMap() - getWidth());
         this.yPos = Randomizer.getRandomInRange(Dimensions.getYMap(), Dimensions.getMapHeight() + Dimensions.getYMap() - getHeight());
@@ -32,8 +33,8 @@ public class Position implements PositionInterface {
          */
         this.xPos = xPos;
         this.yPos = yPos;
-        this.width = 20;
-        this.height = 20;
+        this.width = GameObjectsProperties.PLAYER_SIZE;
+        this.height = GameObjectsProperties.PLAYER_SIZE;
 
     }
 
