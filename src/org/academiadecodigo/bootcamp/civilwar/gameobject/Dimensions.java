@@ -2,11 +2,13 @@ package org.academiadecodigo.bootcamp.civilwar.gameobject;
 
 public class Dimensions {
 
-    private static int mapWidth = 600;
-    private static int mapHeight = 600;
-    private static final int PADDING = 20;
-    private static int xMap = 100;
-    private static int yMap = 0;
+    private static int screenWidth = 900;
+    private static final int screenHeight = 600;
+    private static int mapWidth = 650;
+    private static int mapHeight = 590;
+    private static int xMap = 240;
+    private static int yMap = 5;
+    private static final int PADDING = 0;
 
     public static int getMapWidth(){
         return mapWidth;
@@ -31,4 +33,9 @@ public class Dimensions {
     public static int getBottomEdge(){
         return getYMap() + getMapHeight();
     }
+
+    public static int getScreenWidth(){return screenWidth;}
+
+    public static int getScreenHeight(){return screenHeight;}
+
 }

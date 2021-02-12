@@ -9,6 +9,7 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.Weapon;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Player extends GameObject implements PlayerInterface, Destroyable {
 
@@ -21,9 +22,12 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private int shotsFired;
     private Position myPos;
     private Rectangle rect;
+    private Picture pic;
     private int size;
     private boolean canFire = true;
+    private boolean gotHit = false;
     private int reloadTime;
+    private int protectionTime;
 
     private MyKeyboard keyboard;
 
@@ -36,11 +40,13 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         this.shotsFired = 0;
         this.myPos = myPos;
         this.size = GameObjectsProperties.PLAYER_SIZE;
-        this.rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
+        //this.rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
+        this.pic = new Picture(myPos.getX(), myPos.getY(), "se64.png");
         //this.myPos.show();
         this.keyboard = keyboard;
         this.direction = Direction.LEFT;
 
+        protectionTime = GameObjectsProperties.PLAYER_PROTECTION_TIME;
         reloadTime = GameObjectsProperties.RELOAD_TIME;
 
     }
@@ -62,7 +68,8 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
             int newX = myPos.getX();
             int newY = myPos.getY();
 
-            rect.translate(newX - oldX, newY - oldY);
+            //rect.translate(newX - oldX, newY - oldY);
+            pic.translate(newX - oldX, newY - oldY);
         }
     }
 
@@ -193,6 +200,20 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     }
 
     public void hit(int damage) {
+        if(gotHit){
+            return;
+        }
+        //System.out.println("player really got hit");
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        gotHit = false;
+                    }
+                },
+                protectionTime
+        );
+
         health -= damage;
 
         if (health <= 0) {
@@ -200,6 +221,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
             setDestroyed();
             System.out.println("Game over");
         }
+        gotHit = true;
     }
 
     /**
@@ -211,8 +233,9 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
 
 
     public void show() {
-        rect.setColor(Color.WHITE);
-        rect.fill();
+        //rect.setColor(Color.WHITE);
+        //rect.fill();
+        pic.draw();
     }
 
     public void updateScore(int enemyValue) {
