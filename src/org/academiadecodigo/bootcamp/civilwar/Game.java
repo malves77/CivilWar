@@ -21,6 +21,7 @@ public class Game {
     private Enemy[] enemies;
     private int enemiesRemaining;
 
+    private Weapon[] weapons;
 
     public void init() throws InterruptedException {
 
@@ -39,7 +40,7 @@ public class Game {
         enemiesRemaining = GameObjectsProperties.TOTAL_ENEMIES;
 
         //creates weapons
-        Weapon[] weapons = ObjectFactory.weaponsFactory(GameObjectsProperties.TOTAL_WEAPONS);
+        weapons = ObjectFactory.weaponsFactory(GameObjectsProperties.TOTAL_WEAPONS);
 
 
 
@@ -53,13 +54,13 @@ public class Game {
 
         collisionDetector = new CollisionDetector( weapons);
 
-        start(/*enemies,*/ weapons);
+        //start();
+
+
 
     }
 
-    public void start(Weapon[] weapons) throws InterruptedException {
-
-
+    public void start() throws InterruptedException {
 
 
         while(true){
