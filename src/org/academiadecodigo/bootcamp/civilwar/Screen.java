@@ -17,29 +17,29 @@ public class Screen {
     private Text textScore;
 
     private Picture menuScreenRect;
-    private Rectangle gameOverRect;
+    private Picture gameOverPicture;
 
     public Screen(){
         x = 0;
         y = 0;
         padding = 10;
-        width = Dimensions.getScreenWidth();
+       /* width = Dimensions.getScreenWidth();
         height = Dimensions.getScreenHeight();
-        rect = new Rectangle(x, y, width, height);
+        rect = new Rectangle(x, y, width, height);*/
         objectScore = 0;
         textScore = new Text(40,30,objectScore.toString());
         textScore.grow(20, 30);
 
-        menuScreenRect = new Picture(x, y, "Menu_Image.png");
+        menuScreenRect = new Picture(x, y, "map/mapadeportugalGrey.png");
+        gameOverPicture = new Picture(x,y, "map/mapadeportugalGameover.png");
 
     }
 
-    public void show(){
-        rect.setColor(Color.ORANGE);
-        rect.fill();
+    /*public void show(){
+
         Picture background = new Picture(0, 0, "fundo800x600.png");
         background.draw();
-    }
+    }*/
 
     public void displayScore(int score) {
         objectScore = score;
@@ -58,4 +58,7 @@ public class Screen {
         menuScreenRect.delete();
     }
 
+    public void displayGameOver(){
+        gameOverPicture.draw();
+    }
 }

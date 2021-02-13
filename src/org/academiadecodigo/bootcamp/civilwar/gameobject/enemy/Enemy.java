@@ -73,7 +73,6 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
 
         for(int speed = 0; speed < this.speed; speed++){
             getPosition().moveInDirection(newDirection, 1);
-            //collision detector here TO DO
         }
 
     }

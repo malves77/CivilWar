@@ -20,8 +20,8 @@ public class Position implements PositionInterface {
         this.width = GameObjectsProperties.ENEMY_SIZE;
         this.height = GameObjectsProperties.ENEMY_SIZE;
 
-        this.xPos = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getMapWidth()/2 + Dimensions.getXMap() - getWidth());
-        this.yPos = Randomizer.getRandomInRange(Dimensions.getYMap(), Dimensions.getMapHeight()/2 + Dimensions.getYMap() - getHeight());
+        this.xPos = Randomizer.getRandomInRange(Dimensions.getXMap(), Dimensions.getMapWidth() - getWidth());
+        this.yPos = Randomizer.getRandomInRange(Dimensions.getYMap(), Dimensions.getMapHeight()  - getHeight());
 
     }
 

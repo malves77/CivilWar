@@ -25,11 +25,11 @@ public class Map {
     }
 
     public void show(){
-        rect = new Rectangle( Dimensions.getXMap(), Dimensions.getYMap(), getWidth(), getHeight());
-        rect.setColor(Color.BLACK);
-        Picture map = new Picture(Dimensions.getXMap(), Dimensions.getYMap(), "Mapextended.png");
+        //rect = new Rectangle( Dimensions.getXMap(), Dimensions.getYMap(), getWidth(), getHeight());
+        //rect.setColor(Color.BLACK);
+        Picture map = new Picture(0, 0, "mapadeportugal.png");
         map.draw();
-        rect.draw();
+        //rect.draw();
     }
 
     public int getX(){
@@ -39,7 +39,6 @@ public class Map {
     public int getY(){
         return rect.getY();
     }
-
 
 
 }

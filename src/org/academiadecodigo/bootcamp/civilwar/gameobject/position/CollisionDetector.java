@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject.position;
 
+import org.academiadecodigo.bootcamp.civilwar.gameobject.Dimensions;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.enemy.Enemy;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.player.Player;
@@ -9,9 +10,11 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.WeaponType;
 public class CollisionDetector /*implements CollisionDetectorInterface*/ {
 
     private Weapon[] weapons;
+    private boolean hasReloaded;
 
     public CollisionDetector( Weapon[] weapons) {
         this.weapons = weapons;
+        hasReloaded = false;
     }
 
     public void enemyCollision(Enemy enemy, Enemy[] enemies) {
@@ -111,19 +114,51 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
      * @TODO add verification and arguments for both towers
      * @param player
      */
-    public void reloadSite(Player player ){
+    public void reloadSite(Player player ) {
 
-        if(player.getPosition().getX() > 800 && player.getPosition().getY() > 400) {
 
-            System.out.println("Recarregar torre de belém");
-            player.reload(WeaponType.PASTEL_DE_BELEM);
+        int playerX = player.getPosition().getX();
+        int playerXWidth = playerX + player.getPosition().getWidth();
+        int playerY = player.getPosition().getY();
+        int playerYHeight = playerY + player.getPosition().getHeight();
 
-        }
-        if(player.getPosition().getX() < 300 && player.getPosition().getY() < 100) {
 
-            System.out.println("Recarregar cçerigos");
-            player.reload(WeaponType.FRANCESINHA);
+
+            if (    !hasReloaded &&
+                    playerX <= 630 &&
+                    playerXWidth >= 550 &&
+                    playerY <= 400 &&
+                    playerYHeight >= 350
+            ) {
+                System.out.println("Recarregar torre de belém");
+                player.reload(WeaponType.PASTEL_DE_BELEM);
+
+                hasReloaded = true;
+            }  else if ( !hasReloaded &&
+                        playerX <= 220 &&
+                        playerXWidth >= 160 &&
+                        playerY <= 180 &&
+                        playerYHeight >= 130
+            ) {
+                System.out.println("Recarregar torre dos clérigos");
+                player.reload(WeaponType.FRANCESINHA);
+
+                hasReloaded = true;
+            } else if(
+                    !(playerX <= 630 &&
+                    playerXWidth >= 550 &&
+                    playerY <= 400 &&
+                    playerYHeight >= 350)
+                    &&
+                    !(
+                    playerX <= 220 &&
+                    playerXWidth >= 160 &&
+                    playerY <= 180 &&
+                    playerYHeight >= 130
+                    )
+            ){
+                hasReloaded = false;
+            }
 
         }
     }
-}

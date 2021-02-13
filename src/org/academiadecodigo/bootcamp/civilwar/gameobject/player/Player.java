@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject.player;
 
 import org.academiadecodigo.bootcamp.civilwar.MyKeyboard;
+import org.academiadecodigo.bootcamp.civilwar.gameobject.Animator;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObjectsProperties;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyable;
@@ -22,6 +23,8 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private Weapon[] weapons;
     private int shotsFired;
     private Position myPos;
+    private int centerX;
+    private int centerY;
     private Rectangle rect;
     private Picture pic;
     private int size;
@@ -29,7 +32,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private boolean gotHit = false;
     private int reloadTime;
     private int protectionTime;
-
+    private Animator animator;
     private MyKeyboard keyboard;
 
     public Player(Position myPos, Weapon[] weapons, MyKeyboard keyboard) {
@@ -43,6 +46,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         this.size = GameObjectsProperties.PLAYER_SIZE;
         //this.rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
         this.pic = new Picture(myPos.getX(), myPos.getY(), "playerImage/10.png");
+        this.animator = new Animator(myPos.getX(), myPos.getY(), "player");
         //this.myPos.show();
         this.keyboard = keyboard;
         this.direction = Direction.LEFT;
@@ -69,9 +73,9 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
             int newX = myPos.getX();
             int newY = myPos.getY();
 
+            pic.load(animator.animate("run"));
             //rect.translate(newX - oldX, newY - oldY);
             pic.translate(newX - oldX, newY - oldY);
-
 
 
         }
@@ -173,7 +177,11 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                 //attackTimer.startCounting();
                 canFire = false;
                 weapons[shotsFired].setFired();
-                weapons[shotsFired].move(new Position(myPos.getX(), myPos.getY()), this.direction);
+
+                centerX = (int) (myPos.getX() + myPos.getWidth() / 2);
+                centerY = (int) (myPos.getY() + myPos.getHeight() / 2);
+
+                weapons[shotsFired].move(new Position(centerX, centerY), this.direction);
                 shotsFired++;
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
@@ -270,4 +278,6 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
 
         shotsFired = 0;
     }
+
+
 }

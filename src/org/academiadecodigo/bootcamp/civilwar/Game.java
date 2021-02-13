@@ -34,7 +34,7 @@ public class Game {
 
         //creates screen
         screen = new Screen();
-        screen.show();
+        //screen.show();
         screen.displayScore(0);
 
         //creates map
@@ -117,9 +117,7 @@ public class Game {
 
     public void gameOver(){
 
-        Rectangle gameOverRect = new Rectangle(250, 200, 200, 200);
-        gameOverRect.setColor(Color.WHITE);
-        gameOverRect.fill();
+        screen.displayGameOver();
         Text text = new Text(290, 290, "YOU LOST!!!");
         text.draw();
 
