@@ -23,7 +23,11 @@ public class Game {
 
     private Weapon[] weapons;
 
+    private InputManager inputManager;
+
     public void init() throws InterruptedException {
+
+        inputManager = new InputManager(this);
 
         //creates screen
         screen = new Screen();
@@ -54,14 +58,18 @@ public class Game {
 
         collisionDetector = new CollisionDetector( weapons);
 
+        screen.displayMenu();
         //start();
+        while(!inputManager.canPlay()) {
+            System.out.println("Paused");
+        }
 
-
+        start();
 
     }
 
     public void start() throws InterruptedException {
-
+        screen.removeMenu();
 
         while(true){
 
