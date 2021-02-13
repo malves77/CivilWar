@@ -18,7 +18,7 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
 
         for (Enemy anotherEnemy : enemies) {
 
-            if (enemy == anotherEnemy || anotherEnemy.isDestroyed()) {
+            if (enemy == anotherEnemy || anotherEnemy.isDestroyed() || enemy.isDestroyed()) {
                 continue;
             }
             int enemyX = enemy.getPosition().getX();
@@ -38,7 +38,7 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
                             enemyYHeight >= goY
 
             ) {
-                System.out.println("collided!!!!");
+                System.out.println("collided!!!! enemy with enemy");
                 enemy.setOppositeDirection();
                 anotherEnemy.setOppositeDirection();
             }

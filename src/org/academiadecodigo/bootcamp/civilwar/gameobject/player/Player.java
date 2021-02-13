@@ -42,7 +42,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         this.myPos = myPos;
         this.size = GameObjectsProperties.PLAYER_SIZE;
         //this.rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
-        this.pic = new Picture(myPos.getX(), myPos.getY(), "se64.png");
+        this.pic = new Picture(myPos.getX(), myPos.getY(), "playerImage/10.png");
         //this.myPos.show();
         this.keyboard = keyboard;
         this.direction = Direction.LEFT;
@@ -239,6 +239,18 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         //rect.setColor(Color.WHITE);
         //rect.fill();
         pic.draw();
+
+
+        /*new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        pic.load("playerImage/15.png");
+                    }
+                },
+                2000
+        );*/
+
     }
 
     public void updateScore(int enemyValue) {

@@ -8,6 +8,9 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.position.CollisionDetec
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.Weapon;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.WeaponType;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.Text;
 
 /**
  * Initiate Game(Objects)
@@ -62,7 +65,7 @@ public class Game {
 
 
 
-        while(true){
+        while(!player1.isDestroyed()){
 
             Thread.sleep(50);
             for(GameObject enemy : enemies) {
@@ -98,7 +101,33 @@ public class Game {
             }
 
         }
+
+        gameOver();
+
     }
+
+    public void gameOver(){
+
+        Rectangle gameOverRect = new Rectangle(250, 200, 200, 200);
+        gameOverRect.setColor(Color.WHITE);
+        gameOverRect.fill();
+        Text text = new Text(290, 290, "YOU LOST!!!");
+        text.draw();
+
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        System.exit(1);
+                    }
+                },
+                5000
+        );
+
+
+    }
+
 
     private void spawnNewEnemies(){
         Enemy[] tempEnemies = new Enemy[enemies.length + 2];
