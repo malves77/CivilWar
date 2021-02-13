@@ -15,10 +15,11 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.WeaponType;
  */
 public class Game {
 
-    //private GameObject = new GameObject();
-    Player player1;
-    CollisionDetector collisionDetector;
-    Screen screen;
+    private Player player1;
+    private CollisionDetector collisionDetector;
+    private Screen screen;
+    private Enemy[] enemies;
+    private int enemiesRemaining;
 
 
     public void init() throws InterruptedException {
@@ -34,8 +35,8 @@ public class Game {
 
 
         //creates enemies
-        Enemy[] enemies = ObjectFactory.enemyFactory(GameObjectsProperties.TOTAL_ENEMIES);
-
+        enemies = ObjectFactory.enemyFactory(GameObjectsProperties.TOTAL_ENEMIES);
+        enemiesRemaining = GameObjectsProperties.TOTAL_ENEMIES;
 
         //creates weapons
         Weapon[] weapons = ObjectFactory.weaponsFactory(GameObjectsProperties.TOTAL_WEAPONS);
@@ -50,38 +51,80 @@ public class Game {
 
         player1.show();
 
-        //Collision detector
-        collisionDetector = new CollisionDetector(enemies, weapons);
+        collisionDetector = new CollisionDetector( weapons);
 
-        start(enemies, weapons);
+        start(/*enemies,*/ weapons);
 
     }
 
-    public void start(GameObject[] gameObjects, Weapon[] weapons) throws InterruptedException {
+    public void start(Weapon[] weapons) throws InterruptedException {
+
+
+
 
         while(true){
 
             Thread.sleep(50);
-            for(GameObject enemy : gameObjects) {
+            for(GameObject enemy : enemies) {
                 if(enemy instanceof Enemy){
                     Enemy enem = (Enemy) enemy;
                     enem.move();
-                    collisionDetector.enemyCollision(enem);
+                    collisionDetector.enemyCollision(enem, enemies);
                 }
             }
+
             for(Weapon weapon : weapons) {
                 if(weapon.getFired()){
                     weapon.accelerate();
-                    player1.updateScore(collisionDetector.weaponCollision(weapon));
+
+                    int enemiesKilled = collisionDetector.weaponCollision(weapon, enemies);
+
+                    enemiesRemaining -= enemiesKilled;
+
+                    player1.updateScore(enemiesKilled);
+
                     screen.displayScore(player1.getScore());
-                    System.out.println(player1.getScore());
                 }
             }
 
 
             player1.move();
-            collisionDetector.playerEnemyCollision(player1);
+            collisionDetector.playerEnemyCollision(player1, enemies);
+            collisionDetector.reloadSite(player1);
             player1.attack();
+            double  division = ((double) enemiesRemaining * 10) / ((double) enemies.length * 10) * 10;
+            if(division < GameObjectsProperties.NEW_WAVE_PROB) {
+                spawnNewEnemies();
+            }
+
         }
     }
+
+    private void spawnNewEnemies(){
+        Enemy[] tempEnemies = new Enemy[enemies.length + 2];
+
+                System.out.println("Spawning new enemies");
+        int i = 0;
+
+        for (Enemy enemy : enemies){
+
+            if(!enemy.isDestroyed()){
+
+                tempEnemies[i] = enemy;
+                i++;
+
+            }
+        }
+        System.out.println("old length: " + enemies.length + " new i: " + i);
+        for( int j = i; j < tempEnemies.length; j++){
+
+            tempEnemies[j] = ObjectFactory.singleEnemyFactory();
+
+            tempEnemies[i].show();
+        }
+
+        enemiesRemaining = tempEnemies.length;
+        enemies = tempEnemies;
+    }
+
 }

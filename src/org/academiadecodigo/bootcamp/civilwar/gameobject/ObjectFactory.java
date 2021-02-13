@@ -36,4 +36,9 @@ public class ObjectFactory {
         return weapons;
     }
 
+    public static Enemy singleEnemyFactory(){
+
+        return new Enemy(new Position(), GameObjectsProperties.ENEMY_SPEED, GameObjectsProperties.ENEMY_HEALTH);
+
+    }
 }

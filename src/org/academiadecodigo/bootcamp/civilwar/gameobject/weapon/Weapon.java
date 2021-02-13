@@ -32,6 +32,7 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
     public void setDestroyed() {
         destroyed = true;
         rect.delete();
+
     }
 
     public boolean isDestroyed() {

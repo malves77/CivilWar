@@ -4,18 +4,18 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.enemy.Enemy;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.player.Player;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.Weapon;
+import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.WeaponType;
 
 public class CollisionDetector /*implements CollisionDetectorInterface*/ {
 
-    private Enemy[] enemies;
     private Weapon[] weapons;
 
-    public CollisionDetector(Enemy[] gameObjects, Weapon[] weapons) {
-        this.enemies = gameObjects;
+    public CollisionDetector( Weapon[] weapons) {
         this.weapons = weapons;
     }
 
-    public void enemyCollision(Enemy enemy) {
+    public void enemyCollision(Enemy enemy, Enemy[] enemies) {
+
         for (Enemy anotherEnemy : enemies) {
 
             if (enemy == anotherEnemy || anotherEnemy.isDestroyed()) {
@@ -38,14 +38,14 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
                             enemyYHeight >= goY
 
             ) {
-                //System.out.println("collided!!!!");
+                System.out.println("collided!!!!");
                 enemy.setOppositeDirection();
                 anotherEnemy.setOppositeDirection();
             }
         }
     }
 
-    public int weaponCollision(Weapon weapon) {
+    public int weaponCollision(Weapon weapon, Enemy[] enemies) {
         for (Enemy enemy : enemies) {
             if (weapon.isDestroyed() || enemy.isDestroyed()) {
                 continue;
@@ -76,7 +76,7 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
         return 0;
     }
 
-    public void playerEnemyCollision(Player player){
+    public void playerEnemyCollision(Player player, Enemy[] enemies){
 
         for (Enemy enemy : enemies) {
             if (player.isDestroyed() || enemy.isDestroyed()) {
@@ -100,7 +100,6 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
                 enemyYHeight >= weaponY
             )
             {
-                //System.out.println("player was hit by enemy");
                 player.hit(enemy.getPower());
 
             }
@@ -108,4 +107,23 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
 
     }
 
+    /**
+     * @TODO add verification and arguments for both towers
+     * @param player
+     */
+    public void reloadSite(Player player ){
+
+        if(player.getPosition().getX() > 800 && player.getPosition().getY() > 400) {
+
+            System.out.println("Recarregar torre de belém");
+            player.reload(WeaponType.PASTEL_DE_BELEM);
+
+        }
+        if(player.getPosition().getX() < 300 && player.getPosition().getY() < 100) {
+
+            System.out.println("Recarregar cçerigos");
+            player.reload(WeaponType.FRANCESINHA);
+
+        }
+    }
 }

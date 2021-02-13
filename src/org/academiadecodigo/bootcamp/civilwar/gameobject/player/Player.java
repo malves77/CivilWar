@@ -7,6 +7,7 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyabl
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Direction;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.Weapon;
+import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.WeaponType;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -70,6 +71,9 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
 
             //rect.translate(newX - oldX, newY - oldY);
             pic.translate(newX - oldX, newY - oldY);
+
+
+
         }
     }
 
@@ -182,7 +186,6 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                 );
             }
         }
-
     }
 
     /**
@@ -243,5 +246,16 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     }
     public int getScore (){
         return score;
+    }
+
+    public void reload(WeaponType weaponType){
+
+        for(int i = shotsFired - 1; i >= 0; i--){
+
+            weapons[i] = new Weapon(weaponType);
+
+        }
+
+        shotsFired = 0;
     }
 }

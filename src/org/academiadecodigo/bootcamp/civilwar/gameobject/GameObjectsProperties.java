@@ -6,7 +6,8 @@ public class GameObjectsProperties {
 
 
     public static final int TOTAL_ENEMIES = 5;
-    public static final int TOTAL_WEAPONS = 60;
+    public static final int TOTAL_WEAPONS = 10;
+    public static final int NEW_WAVE_PROB = 2;
 
     public static final int PLAYER_WIDTH = 20;
     public static final int PLAYER_HEIGHT = 20;
