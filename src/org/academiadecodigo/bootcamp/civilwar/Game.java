@@ -24,8 +24,13 @@ public class Game {
     private Enemy[] enemies;
     private int enemiesRemaining;
 
+    private Weapon[] weapons;
+
+    private InputManager inputManager;
 
     public void init() throws InterruptedException {
+
+        inputManager = new InputManager(this);
 
         //creates screen
         screen = new Screen();
@@ -42,7 +47,7 @@ public class Game {
         enemiesRemaining = GameObjectsProperties.TOTAL_ENEMIES;
 
         //creates weapons
-        Weapon[] weapons = ObjectFactory.weaponsFactory(GameObjectsProperties.TOTAL_WEAPONS);
+        weapons = ObjectFactory.weaponsFactory(GameObjectsProperties.TOTAL_WEAPONS);
 
 
 
@@ -56,14 +61,18 @@ public class Game {
 
         collisionDetector = new CollisionDetector( weapons);
 
-        start(/*enemies,*/ weapons);
+        screen.displayMenu();
+        //start();
+        while(!inputManager.canPlay()) {
+            System.out.println("Paused");
+        }
+
+        start();
 
     }
 
-    public void start(Weapon[] weapons) throws InterruptedException {
-
-
-
+    public void start() throws InterruptedException {
+        screen.removeMenu();
 
         while(!player1.isDestroyed()){
 

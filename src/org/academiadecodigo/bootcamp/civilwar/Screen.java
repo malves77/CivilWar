@@ -16,6 +16,9 @@ public class Screen {
     private Integer objectScore;
     private Text textScore;
 
+    private Picture menuScreenRect;
+    private Rectangle gameOverRect;
+
     public Screen(){
         x = 0;
         y = 0;
@@ -27,7 +30,7 @@ public class Screen {
         textScore = new Text(40,30,objectScore.toString());
         textScore.grow(20, 30);
 
-
+        menuScreenRect = new Picture(x, y, "Menu_Image.png");
 
     }
 
@@ -42,6 +45,17 @@ public class Screen {
         objectScore = score;
         textScore.setText(objectScore.toString());
         textScore.draw();
+    }
+
+    public void displayMenu() {
+        System.out.println("Called displayMenu!");
+        menuScreenRect.draw();
+        //can Animate up
+    }
+
+    public void removeMenu() {
+        System.out.println("Removing Menu");
+        menuScreenRect.delete();
     }
 
 }
