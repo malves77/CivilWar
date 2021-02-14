@@ -15,6 +15,7 @@ import org.academiadecodigo.simplegraphics.graphics.Text;
  */
 public class Game {
 
+
     private Player player1;
     private CollisionDetector collisionDetector;
     private Screen screen;
@@ -24,6 +25,8 @@ public class Game {
     private Weapon[] weapons;
 
     private InputManager inputManager;
+    private Audio audioGame;
+    private Audio dieAudio;
 
     public void init() throws InterruptedException {
 
@@ -46,6 +49,9 @@ public class Game {
         //creates weapons
         weapons = ObjectFactory.weaponsFactory(GameObjectsProperties.TOTAL_WEAPONS);
 
+        //creates audio
+        audioGame = new Audio(1);
+        //dieAudio = new Audio(3);
 
 
         MyKeyboard keyboard = new MyKeyboard();
@@ -56,11 +62,11 @@ public class Game {
 
         player1.show();
 
-        collisionDetector = new CollisionDetector( weapons);
+        collisionDetector = new CollisionDetector(weapons);
 
         screen.displayMenu();
         //start();
-        while(!inputManager.canPlay()) {
+        while (!inputManager.canPlay()) {
             System.out.println("Paused");
         }
 
@@ -71,20 +77,21 @@ public class Game {
     public void start() throws InterruptedException {
         screen.removeMenu();
         screen.createLivesPic();
+        audioGame.playInGameMusic();
 
-        while(!player1.isDestroyed()){
+        while (!player1.isDestroyed()) {
 
             Thread.sleep(50);
-            for(GameObject enemy : enemies) {
-                if(enemy instanceof Enemy){
+            for (GameObject enemy : enemies) {
+                if (enemy instanceof Enemy) {
                     Enemy enem = (Enemy) enemy;
                     enem.move();
                     collisionDetector.enemyCollision(enem, enemies);
                 }
             }
 
-            for(Weapon weapon : weapons) {
-                if(weapon.getFired()){
+            for (Weapon weapon : weapons) {
+                if (weapon.getFired()) {
                     weapon.accelerate();
 
                     int enemiesKilled = collisionDetector.weaponCollision(weapon, enemies);
@@ -101,8 +108,8 @@ public class Game {
             collisionDetector.playerEnemyCollision(player1, enemies);
             collisionDetector.reloadSite(player1);
             player1.attack();
-            double  division = ((double) enemiesRemaining * 10) / ((double) enemies.length * 10) * 10;
-            if(division < GameObjectsProperties.NEW_WAVE_PROB) {
+            double division = ((double) enemiesRemaining * 10) / ((double) enemies.length * 10) * 10;
+            if (division < GameObjectsProperties.NEW_WAVE_PROB) {
                 spawnNewEnemies();
                 screen.updateWave();
             }
@@ -112,11 +119,11 @@ public class Game {
         }
 
         gameOver();
+        audioGame.stopSound();
 
     }
 
-    public void gameOver(){
-
+    public void gameOver() {
         screen.displayGameOver();
 
         Text text = new Text(350, 260, "YOU DIED!!!");
@@ -138,21 +145,19 @@ public class Game {
                     }
                 },
                 10000
+
         );
-
-
     }
 
-
-    private void spawnNewEnemies(){
+    private void spawnNewEnemies() {
         Enemy[] tempEnemies = new Enemy[enemies.length + 2];
 
-                System.out.println("Spawning new enemies");
+        System.out.println("Spawning new enemies");
         int i = 0;
 
-        for (Enemy enemy : enemies){
+        for (Enemy enemy : enemies) {
 
-            if(!enemy.isDestroyed()){
+            if (!enemy.isDestroyed()) {
 
                 tempEnemies[i] = enemy;
                 i++;
@@ -160,7 +165,7 @@ public class Game {
             }
         }
         System.out.println("old length: " + enemies.length + " new i: " + i);
-        for( int j = i; j < tempEnemies.length; j++){
+        for (int j = i; j < tempEnemies.length; j++) {
 
             tempEnemies[j] = ObjectFactory.singleEnemyFactory();
 

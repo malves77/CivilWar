@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject.player;
 
+import org.academiadecodigo.bootcamp.civilwar.Audio;
 import org.academiadecodigo.bootcamp.civilwar.MyKeyboard;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.Animator;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
@@ -34,6 +35,8 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     private int protectionTime;
     private Animator animator;
     private MyKeyboard keyboard;
+    private Audio looseLives;
+    private Audio death;
 
     public Player(Position myPos, Weapon[] weapons, MyKeyboard keyboard) {
         super(myPos);
@@ -53,7 +56,6 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
 
         protectionTime = GameObjectsProperties.PLAYER_PROTECTION_TIME;
         reloadTime = GameObjectsProperties.RELOAD_TIME;
-
     }
 
 
@@ -166,7 +168,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         return dir;
     }
 
-    public Position getPosition(){
+    public Position getPosition() {
         return myPos;
     }
 
@@ -211,7 +213,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     }
 
     public void hit(int damage) {
-        if(gotHit){
+        if (gotHit) {
             return;
         }
         //System.out.println("player really got hit");
@@ -224,7 +226,14 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                 },
                 protectionTime
         );
+        if (health != 1) {
+            looseLives = new Audio(3);
+            looseLives.playSound();
 
+        } else if (health == 1){
+            death = new Audio(2);
+            death.playSound();
+        }
         health -= damage;
 
         if (health <= 0) {
@@ -264,13 +273,14 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
     public void updateScore(int enemyValue) {
         score += enemyValue;
     }
-    public int getScore (){
+
+    public int getScore() {
         return score;
     }
 
-    public void reload(WeaponType weaponType){
+    public void reload(WeaponType weaponType) {
 
-        for(int i = shotsFired - 1; i >= 0; i--){
+        for (int i = shotsFired - 1; i >= 0; i--) {
 
             weapons[i] = new Weapon(weaponType);
 
@@ -279,11 +289,11 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         shotsFired = 0;
     }
 
-    public int getHealth(){
+    public int getHealth() {
         return health;
     }
 
-    public int getAvailableShots(){
+    public int getAvailableShots() {
         return weapons.length - shotsFired;
     }
 }
