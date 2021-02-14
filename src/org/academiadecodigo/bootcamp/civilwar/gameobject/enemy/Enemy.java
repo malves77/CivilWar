@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject.enemy;
 
+import org.academiadecodigo.bootcamp.civilwar.gameobject.Animator;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObject;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObjectsProperties;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyable;
@@ -7,6 +8,7 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Direction;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 public class Enemy extends GameObject implements EnemyInterface, Destroyable {
@@ -15,11 +17,13 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     private int speed;
     private int size;
     private Rectangle rect;
+    private Picture pic;
     private Direction currentDirection;
     private int changeDirectionLevel = GameObjectsProperties.ENEMY_CHANGEDIRECTIONLEVEL;
     private int health;
     private boolean destroyed;
     private int power;
+    private Animator animator;
 
     public Enemy(Position myPos, int speed) {
         super(myPos);
@@ -30,7 +34,9 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
         health = GameObjectsProperties.ENEMY_HEALTH;
         size = GameObjectsProperties.ENEMY_SIZE;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
-        rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
+        //rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
+        pic = new Picture(myPos.getX(), myPos.getY(), "tourist/runDown/1.png");
+        this.animator = new Animator(myPos.getX(), myPos.getY(), "tourist");
         //this.show();
     }
 
@@ -43,7 +49,9 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
         this.health = health;
         size = GameObjectsProperties.ENEMY_SIZE;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
-        rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
+        //rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
+        pic = new Picture(myPos.getX(), myPos.getY(), "tourist/runDown/1.png");
+        this.animator = new Animator(myPos.getX(), myPos.getY(), "tourist");
     }
 
     public void move() {
@@ -60,7 +68,9 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
         int newX = myPos.getX();
         int newY = myPos.getY();
 
-        this.rect.translate(newX - oldX, newY - oldY);
+        pic.load(animator.animate(currentDirection.getRunDir()));
+        pic.translate(newX - oldX, newY - oldY);
+        //this.rect.translate(newX - oldX, newY - oldY);
         show();
     }
 
@@ -78,8 +88,10 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     }
 
     public void show() {
-        rect.setColor(Color.BLACK);
-        rect.fill();
+        /*rect.setColor(Color.BLACK);
+        rect.fill();*/
+        pic.draw();
+
     }
 
     public Direction chooseDirection() {
@@ -92,7 +104,8 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     }
     public void setDestroyed(){
         destroyed = true;
-        rect.delete();
+        //rect.delete();
+        pic.delete();
     }
 
     public boolean isDestroyed() {

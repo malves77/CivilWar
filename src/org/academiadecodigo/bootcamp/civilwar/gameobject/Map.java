@@ -27,7 +27,7 @@ public class Map {
     public void show(){
         //rect = new Rectangle( Dimensions.getXMap(), Dimensions.getYMap(), getWidth(), getHeight());
         //rect.setColor(Color.BLACK);
-        Picture map = new Picture(0, 0, "mapadeportugal.png");
+        Picture map = new Picture(0, 0, GameObjectsProperties.MAP_IMG);
         map.draw();
         //rect.draw();
     }

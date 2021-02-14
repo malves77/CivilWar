@@ -89,8 +89,8 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
     }
 
     public void show(){
-        rect = new Rectangle(myPos.getX(), myPos.getY(), 10, 10);
-        rect.setColor(Color.GRAY);
+        rect = new Rectangle(myPos.getX(), myPos.getY(), GameObjectsProperties.WEAPON_WIDTH, GameObjectsProperties.WEAPON_HEIGHT);
+        rect.setColor(Color.RED);
         rect.fill();
     }
 

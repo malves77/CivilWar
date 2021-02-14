@@ -7,9 +7,6 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.player.Player;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.CollisionDetector;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.Weapon;
-import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.WeaponType;
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
 /**
@@ -35,7 +32,7 @@ public class Game {
         //creates screen
         screen = new Screen();
         //screen.show();
-        screen.displayScore(0);
+        //screen.displayScore(0);
 
         //creates map
         Map map = new Map();
@@ -74,6 +71,7 @@ public class Game {
     public void start() throws InterruptedException {
         screen.removeMenu();
 
+
         while(!player1.isDestroyed()){
 
             Thread.sleep(50);
@@ -95,7 +93,6 @@ public class Game {
 
                     player1.updateScore(enemiesKilled);
 
-                    screen.displayScore(player1.getScore());
                 }
             }
 
@@ -107,7 +104,10 @@ public class Game {
             double  division = ((double) enemiesRemaining * 10) / ((double) enemies.length * 10) * 10;
             if(division < GameObjectsProperties.NEW_WAVE_PROB) {
                 spawnNewEnemies();
+                screen.updateWave();
             }
+
+            screen.updateInterface(player1.getScore(), player1.getHealth(), player1.getAvailableShots());
 
         }
 
@@ -118,8 +118,15 @@ public class Game {
     public void gameOver(){
 
         screen.displayGameOver();
-        Text text = new Text(290, 290, "YOU LOST!!!");
+        Text text = new Text(350, 260, "YOU DIED!!!");
+        Text score = new Text(300, 300, ((Integer) player1.getScore()).toString());
+        Text waves = new Text(400, 300, ((Integer) screen.getWaveCount()).toString());
+        text.grow(20, 30);
+        score.grow(20, 30);
+        waves.grow(20, 30);
         text.draw();
+        score.draw();
+        waves.draw();
 
 
         new java.util.Timer().schedule(
@@ -129,7 +136,7 @@ public class Game {
                         System.exit(1);
                     }
                 },
-                5000
+                10000
         );
 
 

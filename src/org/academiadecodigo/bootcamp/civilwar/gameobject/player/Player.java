@@ -279,5 +279,11 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         shotsFired = 0;
     }
 
+    public int getHealth(){
+        return health;
+    }
 
+    public int getAvailableShots(){
+        return weapons.length - shotsFired;
+    }
 }
