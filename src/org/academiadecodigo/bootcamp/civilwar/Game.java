@@ -119,13 +119,10 @@ public class Game {
 
         screen.displayGameOver();
 
-        Text text = new Text(350, 260, "YOU DIED!!!");
         Text score = new Text(300, 300, ((Integer) player1.getScore()).toString());
         Text waves = new Text(400, 300, ((Integer) screen.getWaveCount()).toString());
-        text.grow(20, 30);
         score.grow(20, 30);
         waves.grow(20, 30);
-        text.draw();
         score.draw();
         waves.draw();
 

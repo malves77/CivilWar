@@ -96,7 +96,7 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
         rect.setColor(Color.RED);
         rect.fill();*/
 
-        this.pic = new Picture(myPos.getX(), myPos.getY(), "weapon/1.png");
+        this.pic = new Picture(myPos.getX(), myPos.getY(), type.getImgPath());
         pic.draw();
     }
 
