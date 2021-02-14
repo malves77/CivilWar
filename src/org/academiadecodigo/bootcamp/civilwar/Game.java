@@ -70,7 +70,8 @@ public class Game {
 
     public void start() throws InterruptedException {
         screen.removeMenu();
-        screen.createLivesPic();
+        //screen.createLivesPic();
+        screen.firstScreenInterPaint();
 
         while(!player1.isDestroyed()){
 
