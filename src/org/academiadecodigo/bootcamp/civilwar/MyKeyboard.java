@@ -1,7 +1,5 @@
 package org.academiadecodigo.bootcamp.civilwar;
 
-import org.academiadecodigo.bootcamp.civilwar.gameobject.player.Player;
-import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Direction;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -9,9 +7,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 public class MyKeyboard implements KeyboardHandler {
 
-    //KeyBoardThreadHandler keyThreads;
     private Keyboard keyboard;
-    //private Player player;
 
     private KeyboardEvent eventUp;
     private KeyboardEvent eventDown;
@@ -36,7 +32,6 @@ public class MyKeyboard implements KeyboardHandler {
             k = false;
 
         keyboard = new Keyboard(this);
-        //this.player = player;
 
         init();
     }
@@ -106,29 +101,19 @@ public class MyKeyboard implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent){
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_UP){
-            //if(keyboardEvent.getKey() == keyboard.)
             keysPressed[0] = true;
-            //System.out.println("Up Pressed");
-            //player.move(Direction.UP);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN){
             keysPressed[1] = true;
-            //System.out.println("Down Pressed");
-            //player.move(Direction.DOWN);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT){
             keysPressed[2] = true;
-            //System.out.println("Left Pressed");
-            //player.move(Direction.LEFT);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT){
             keysPressed[3] = true;
-            //System.out.println("Right Pressed");
-            //player.move(Direction.RIGHT);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
             keysPressed[4] = true;
-            //player.attack();
         }
 
     }
@@ -140,26 +125,18 @@ public class MyKeyboard implements KeyboardHandler {
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_UP){
             keysPressed[0] = false;
-            //player.move(Direction.UP);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN){
-            //System.out.println("Down Released");
             keysPressed[1] = false;
-            //player.move(Direction.DOWN);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT){
-            //System.out.println("Left Released");
             keysPressed[2] = false;
-            //player.move(Direction.LEFT);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT){
-            //System.out.println("Right Released");
             keysPressed[3] = false;
-            //player.move(Direction.RIGHT);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
             keysPressed[4] = false;
-            //player.attack();
         }
     }
 

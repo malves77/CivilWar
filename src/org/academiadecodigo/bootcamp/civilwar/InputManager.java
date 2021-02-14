@@ -14,7 +14,7 @@ public class InputManager {
         this.gameRef = gameRef;
         myMouse = new MyMouse(this);
         canPlay = false;
-        System.out.println("Input Created with " + myMouse);
+        //System.out.println("Input Created with " + myMouse);
     }
 
     public boolean canPlay() throws InterruptedException {

@@ -93,7 +93,7 @@ public class Screen {
     }
 
     public void removeMenu() {
-        System.out.println("Removing Menu");
+        //System.out.println("Removing Menu");
         menuScreenRect.delete();
     }
 
@@ -127,7 +127,6 @@ public class Screen {
         }
         this.availableAmmo = availableAmmo;
         if(this.availableAmmo == ammoPics.length) {
-            System.out.println("repainting all ammo");
             for(Picture pic : ammoPics){
                 pic.draw();
             }

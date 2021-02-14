@@ -48,7 +48,6 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
         this.health = health;
         size = GameObjectsProperties.ENEMY_SIZE;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
-        //rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
         pic = new Picture(myPos.getX(), myPos.getY(), "images/tourist/runDown/1.png");
         this.animator = new Animator(myPos.getX(), myPos.getY(), "images/tourist");
     }
@@ -69,7 +68,6 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
 
         pic.load(animator.animate(currentDirection.getRunDir()));
         pic.translate(newX - oldX, newY - oldY);
-        //this.rect.translate(newX - oldX, newY - oldY);
         show();
     }
 
@@ -114,12 +112,12 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     public void hit(int damage) {
         if (health - damage > 0) {
             health -= damage;
-            System.out.println("Damage taken");
-            System.out.println(getHealth());
+            //System.out.println("Damage taken");
+            //System.out.println(getHealth());
         } else {
             health = 0;
             setDestroyed();
-            System.out.println("destroyed");
+            //System.out.println("destroyed");
         }
     }
 

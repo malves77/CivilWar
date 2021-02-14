@@ -68,7 +68,7 @@ public class Game {
         screen.displayMenu();
         //start();
         while (!inputManager.canPlay()) {
-            System.out.println("Paused");
+            System.out.println("");
         }
 
         start();
@@ -152,7 +152,6 @@ public class Game {
     private void spawnNewEnemies() {
         Enemy[] tempEnemies = new Enemy[enemies.length + 2];
 
-        System.out.println("Spawning new enemies");
         int i = 0;
 
         for (Enemy enemy : enemies) {
@@ -164,7 +163,6 @@ public class Game {
 
             }
         }
-        System.out.println("old length: " + enemies.length + " new i: " + i);
         for (int j = i; j < tempEnemies.length; j++) {
 
             tempEnemies[j] = ObjectFactory.singleEnemyFactory();

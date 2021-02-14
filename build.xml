@@ -1,7 +1,7 @@
-<project name="CivilWar" default="jarfile">
+<project name="TouristControl" default="jarfile">
 
     <target name="init">
-        <property name="project.name" value="CivilWar"/>
+        <property name="project.name" value="TouristControl"/>
         <property name="src.dir" value="src"/>
         <property name="main.class" value="org.academiadecodigo.bootcamp.civilwar.Portugal"/>
         <property name="build.dir" value="build"/>
