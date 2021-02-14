@@ -23,8 +23,9 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
     private boolean destroyed;
     private int power;
     private Animator animator;
+    private EnemyType type;
 
-    public Enemy(Position myPos, int speed) {
+    public Enemy(Position myPos, int speed, EnemyType enemyType) {
         super(myPos);
         destroyed = false;
         this.myPos = myPos;
@@ -32,24 +33,26 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
         power = GameObjectsProperties.ENEMY_POWER;
         health = GameObjectsProperties.ENEMY_HEALTH;
         size = GameObjectsProperties.ENEMY_SIZE;
+        this.type = enemyType;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
         //rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
-        pic = new Picture(myPos.getX(), myPos.getY(), "images/tourist/runDown/1.png");
-        this.animator = new Animator(myPos.getX(), myPos.getY(), "images/tourist");
+        pic = new Picture(myPos.getX(), myPos.getY(), type.getPathToFolder() + "/runDown/1.png");
+        this.animator = new Animator(myPos.getX(), myPos.getY(), type.getPathToFolder());
         //this.show();
     }
 
-    public Enemy(Position myPos, int speed, int health) {
+    public Enemy(Position myPos, int speed, int health, EnemyType enemyType) {
         super(myPos);
         destroyed = false;
         this.myPos = myPos;
         this.speed = speed;
         power = GameObjectsProperties.ENEMY_POWER;
         this.health = health;
+        this.type = enemyType;
         size = GameObjectsProperties.ENEMY_SIZE;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
-        pic = new Picture(myPos.getX(), myPos.getY(), "images/tourist/runDown/1.png");
-        this.animator = new Animator(myPos.getX(), myPos.getY(), "images/tourist");
+        pic = new Picture(myPos.getX(), myPos.getY(), type.getPathToFolder() + "/runDown/1.png");
+        this.animator = new Animator(myPos.getX(), myPos.getY(), type.getPathToFolder());
     }
 
     public void move() {
