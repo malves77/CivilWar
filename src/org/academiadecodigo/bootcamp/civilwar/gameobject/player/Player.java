@@ -177,8 +177,8 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                 canFire = false;
                 weapons[shotsFired].setFired();
 
-                centerX = (int) (myPos.getX() + myPos.getWidth() / 2);
-                centerY = (int) (myPos.getY() + myPos.getHeight() / 2);
+                centerX = (int) (myPos.getX() /*+ myPos.getWidth() / 2*/);
+                centerY = (int) (myPos.getY() /*+ myPos.getHeight() / 2*/);
 
                 weapons[shotsFired].move(new Position(centerX, centerY), this.direction);
                 shotsFired++;
