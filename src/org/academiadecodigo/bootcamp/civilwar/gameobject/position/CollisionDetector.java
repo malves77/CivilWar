@@ -41,7 +41,6 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
                             enemyYHeight >= goY
 
             ) {
-                System.out.println("collided!!!! enemy with enemy");
                 enemy.setOppositeDirection();
                 anotherEnemy.setOppositeDirection();
             }
@@ -130,7 +129,6 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
                     playerY <= 400 &&
                     playerYHeight >= 350
             ) {
-                System.out.println("Recarregar torre de belém");
                 player.reload(WeaponType.PASTEL_DE_BELEM);
 
                 hasReloaded = true;
@@ -140,7 +138,6 @@ public class CollisionDetector /*implements CollisionDetectorInterface*/ {
                         playerY <= 180 &&
                         playerYHeight >= 130
             ) {
-                System.out.println("Recarregar torre dos clérigos");
                 player.reload(WeaponType.FRANCESINHA);
 
                 hasReloaded = true;

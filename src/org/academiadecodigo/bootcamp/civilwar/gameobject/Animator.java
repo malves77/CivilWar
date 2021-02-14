@@ -14,7 +14,7 @@ public class Animator {
         this.rootPath = rootPath;
         this.frameTime = 40;
         this.index = 1;
-        this.frame = new Picture(x, y, "playerImage/10.png");
+        this.frame = new Picture(x, y, "player/runDown1.png");
     }
 
     public String /* Picture */animate(String path){

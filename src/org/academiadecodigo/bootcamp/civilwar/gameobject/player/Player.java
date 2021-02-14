@@ -45,7 +45,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         this.myPos = myPos;
         this.size = GameObjectsProperties.PLAYER_SIZE;
         //this.rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
-        this.pic = new Picture(myPos.getX(), myPos.getY(), "playerImage/10.png");
+        this.pic = new Picture(myPos.getX(), myPos.getY(), "player/runDown/1.png");
         this.animator = new Animator(myPos.getX(), myPos.getY(), "player");
         //this.myPos.show();
         this.keyboard = keyboard;
@@ -73,7 +73,7 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
             int newX = myPos.getX();
             int newY = myPos.getY();
 
-            pic.load(animator.animate("run"));
+            pic.load(animator.animate(direction.getRunDir()));
             //rect.translate(newX - oldX, newY - oldY);
             pic.translate(newX - oldX, newY - oldY);
 

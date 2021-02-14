@@ -2,14 +2,24 @@ package org.academiadecodigo.bootcamp.civilwar.gameobject.position;
 
 public enum Direction {
 
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT,
-    DIAGONAL_UPRIGHT,
-    DIAGONAL_UPLEFT,
-    DIAGONAL_DOWNRIGHT,
-    DIAGONAL_DOWNLEFT;
+    UP("runUp"),
+    DOWN("runDown"),
+    RIGHT("runRight"),
+    LEFT("runLeft"),
+    DIAGONAL_UPRIGHT("runUpRight"),
+    DIAGONAL_UPLEFT("runUpLeft"),
+    DIAGONAL_DOWNRIGHT("runDownRight"),
+    DIAGONAL_DOWNLEFT("runDownLeft");
+
+    private String runDir;
+
+    Direction (String runDir){
+        this.runDir = runDir;
+    };
+
+    public String getRunDir() {
+        return runDir;
+    }
 
     public Direction getOpposite(){
         Direction opposite = null;
@@ -42,4 +52,6 @@ public enum Direction {
         return opposite;
         }
 }
+
+
 
