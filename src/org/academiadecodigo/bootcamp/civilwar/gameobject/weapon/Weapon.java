@@ -8,6 +8,7 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Direction;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Weapon extends GameObject implements Destroyable, WeaponInterface {
 
@@ -19,6 +20,7 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
     private int speed;
     private Position myPos;
     private Rectangle rect;
+    private Picture pic;
     private boolean fired;
 
     public Weapon( WeaponType type) {
@@ -31,8 +33,8 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
 
     public void setDestroyed() {
         destroyed = true;
-        rect.delete();
-
+        //rect.delete();
+        pic.delete();
     }
 
     public boolean isDestroyed() {
@@ -73,7 +75,8 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
         int newX = myPos.getX();
         int newY = myPos.getY();
 
-        rect.translate(newX - oldX, newY - oldY);
+        pic.translate(newX - oldX, newY - oldY);
+        //rect.translate(newX - oldX, newY - oldY);
     }
 
     public void setFired(){
@@ -89,9 +92,12 @@ public class Weapon extends GameObject implements Destroyable, WeaponInterface {
     }
 
     public void show(){
-        rect = new Rectangle(myPos.getX(), myPos.getY(), GameObjectsProperties.WEAPON_WIDTH, GameObjectsProperties.WEAPON_HEIGHT);
+        /*rect = new Rectangle(myPos.getX(), myPos.getY(), GameObjectsProperties.WEAPON_WIDTH, GameObjectsProperties.WEAPON_HEIGHT);
         rect.setColor(Color.RED);
-        rect.fill();
+        rect.fill();*/
+
+        this.pic = new Picture(myPos.getX(), myPos.getY(), "weapon/1.png");
+        pic.draw();
     }
 
     public Position getPosition(){

@@ -22,6 +22,7 @@ public class Screen {
     private Text textPlayerLives;
     private Integer availableAmmo;
     private Text textAmmo;
+    private Picture[] livesPics;
 
     private Picture menuScreenRect;
     private Picture gameOverPicture;
@@ -36,6 +37,7 @@ public class Screen {
         playerLives = GameObjectsProperties.PLAYER_HEALTH;
         availableAmmo = GameObjectsProperties.TOTAL_WEAPONS;
 
+
         textScore = new Text(50,120,objectScore.toString());
         textScore.grow(20, 30);
         textWaves = new Text(50, 340, waveCount.toString());
@@ -44,7 +46,6 @@ public class Screen {
         textPlayerLives.grow(20, 30);
         textAmmo = new Text(720, 340, availableAmmo.toString());
         textAmmo.grow(20, 30);
-
 
 
         menuScreenRect = new Picture(x, y, GameObjectsProperties.FIRST_SCREEN_IMG);
@@ -59,6 +60,10 @@ public class Screen {
         textScore.setText(objectScore.toString());
         textScore.draw();
     }*/
+
+    private void createLivesPic(){
+
+    }
 
     public void displayMenu() {
         System.out.println("Called displayMenu!");
