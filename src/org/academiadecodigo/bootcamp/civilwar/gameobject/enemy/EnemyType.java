@@ -21,13 +21,13 @@ public enum EnemyType {
 
     public EnemyType getRandomEnemy(){
         int value = Randomizer.getRandomWithMax(100);
-        System.out.println("value is: " + value);
-        if(value < 76){
+
+        if(value < 91){
 
             return EnemyType.ENEMY;
-        } else if(value < 84){
+        } else if(value < 94){
             return EnemyType.ROB;
-        } else if(value < 92){
+        } else if(value < 97){
             return EnemyType.CHRIS;
         } else {
             return EnemyType.RAC;
