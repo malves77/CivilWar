@@ -7,6 +7,7 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.player.Player;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.CollisionDetector;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.Weapon;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
 /**
@@ -126,8 +127,10 @@ public class Game {
     public void gameOver() {
         screen.displayGameOver();
 
-        Text score = new Text(300, 300, ((Integer) player1.getScore()).toString());
-        Text waves = new Text(400, 300, ((Integer) screen.getWaveCount()).toString());
+        Text score = new Text(260, 300, ((Integer) player1.getScore()).toString());
+        Text waves = new Text(530, 300, ((Integer) screen.getWaveCount()).toString());
+        score.setColor(Color.WHITE);
+        waves.setColor(Color.WHITE);
         score.grow(20, 30);
         waves.grow(20, 30);
         score.draw();
