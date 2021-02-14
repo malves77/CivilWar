@@ -22,6 +22,7 @@ public class Screen {
     private Text textPlayerLives;
     private Integer availableAmmo;
     private Text textAmmo;
+    private Picture[] ammoPics;
     private Picture[] livesPics;
 
     private Picture menuScreenRect;
@@ -36,42 +37,52 @@ public class Screen {
         waveCount = 1;
         playerLives = GameObjectsProperties.PLAYER_HEALTH;
         availableAmmo = GameObjectsProperties.TOTAL_WEAPONS;
+        ammoPics = new Picture[availableAmmo];
 
 
-        textScore = new Text(50,120,objectScore.toString());
+        textScore = new Text(55,120,objectScore.toString());
         textScore.grow(20, 30);
-        textWaves = new Text(50, 340, waveCount.toString());
+        textWaves = new Text(60, 340, waveCount.toString());
         textWaves.grow(20, 30);
-        textPlayerLives = new Text(720, 120, playerLives.toString());
-        textPlayerLives.grow(20, 30);
-        textAmmo = new Text(720, 340, availableAmmo.toString());
-        textAmmo.grow(20, 30);
+
 
         menuScreenRect = new Picture(x, y, GameObjectsProperties.FIRST_SCREEN_IMG);
         gameOverPicture = new Picture(x,y, GameObjectsProperties.GAMEOVER_IMG);
 
     }
 
-
-
-    /*public void displayScore(int score) {
-        objectScore = score;
-        textScore.setText(objectScore.toString());
-        textScore.draw();
-    }*/
-
     public void createLivesPic(){
-        Picture life1 = new Picture(Dimensions.getMapWidth() + 15, 80, "lives/Choriçosmall.png");
-        Picture life2 = new Picture(Dimensions.getMapWidth() + 65, 80, "lives/Choriçosmall.png");
-        Picture life3 = new Picture(Dimensions.getMapWidth() + 15, 130, "lives/Choriçosmall.png");
-        Picture life4 = new Picture(Dimensions.getMapWidth() + 65, 130, "lives/Choriçosmall.png");
-        Picture life5 = new Picture(Dimensions.getMapWidth() + 15, 180, "lives/Choriçosmall.png");
-        Picture life6 = new Picture(Dimensions.getMapWidth() + 65, 180, "lives/Choriçosmall.png");
+        Picture life1 = new Picture(Dimensions.getMapWidth() + 15, 80, "images/lives/Choriçosmall.png");
+        Picture life2 = new Picture(Dimensions.getMapWidth() + 65, 80, "images/lives/Choriçosmall.png");
+        Picture life3 = new Picture(Dimensions.getMapWidth() + 15, 130, "images/lives/Choriçosmall.png");
+        Picture life4 = new Picture(Dimensions.getMapWidth() + 65, 130, "images/lives/Choriçosmall.png");
+        Picture life5 = new Picture(Dimensions.getMapWidth() + 15, 180, "images/lives/Choriçosmall.png");
+        Picture life6 = new Picture(Dimensions.getMapWidth() + 65, 180, "images/lives/Choriçosmall.png");
         livesPics = new Picture[]{life1, life2, life3, life4, life5, life6};
 
         for(Picture pic : livesPics){
             pic.draw();
         }
+
+    }
+
+    public void createAmmoPics(){
+
+        int originX = Dimensions.getMapWidth() + 40;
+        int originY = 280;
+        int ammoX = originX + 13;
+
+
+        Picture container = new Picture(originX, originY, "images/ammo/ammocontainer.png");
+        container.draw();
+
+        ammoPics[0] = new Picture(ammoX, originY + 15, "images/ammo/ammo0.png" );
+        ammoPics[0].draw();
+        for(int i = 1; i < ammoPics.length; i++){
+            ammoPics[i] = new Picture(ammoX, ammoPics[i-1].getY() + ammoPics[i-1].getHeight() + 4, "images/ammo/ammo" + i + ".png");
+            ammoPics[i].draw();
+        }
+
 
     }
 
@@ -97,28 +108,39 @@ public class Screen {
     public void updateInterface(int playerScore, int playerLives, int availableAmmo) {
         objectScore = playerScore;
         textScore.setText(objectScore.toString());
+        textScore.setColor(Color.WHITE);
         textScore.draw();
 
         textWaves.setText(waveCount.toString());
+        textWaves.setColor(Color.WHITE);
         textWaves.draw();
 
-        /*this.playerLives = playerLives;
-
-        textPlayerLives.setText(this.playerLives.toString());
-        textPlayerLives.draw();*/
         if(this.playerLives > playerLives) {
             this.playerLives = playerLives;
-            livesPics[playerLives].load("lives/ChoriçoBrancosmall.png");
+            livesPics[playerLives].load("images/lives/ChoriçoBrancosmall.png");
             livesPics[playerLives].draw();
-            //@TODO: change picture to empty choriço
         }
 
+
+        if(this.availableAmmo > availableAmmo){
+            this.ammoPics[ammoPics.length - availableAmmo - 1].delete();
+        }
         this.availableAmmo = availableAmmo;
-        textAmmo.setText(this.availableAmmo.toString());
-        textAmmo.draw();
+        if(this.availableAmmo == ammoPics.length) {
+            System.out.println("repainting all ammo");
+            for(Picture pic : ammoPics){
+                pic.draw();
+            }
+        }
+
     }
 
     public int getWaveCount(){
         return waveCount;
+    }
+
+    public void firstScreenInterPaint(){
+        createAmmoPics();
+        createLivesPic();
     }
 }

@@ -1,7 +1,5 @@
 package org.academiadecodigo.bootcamp.civilwar.gameobject;
 
-import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
-
 public class GameObjectsProperties {
 
 
@@ -29,8 +27,8 @@ public class GameObjectsProperties {
     public static final int WEAPON_HEIGHT = 10;
     public static final int WEAPON_SPEED = 20;
 
-    public static final String FIRST_SCREEN_IMG = "map/mapadeportugalGrey.png";
-    public static final String MAP_IMG = "map/mapadeportugal.png";
-    public static final String GAMEOVER_IMG = "map/mapadeportugalGameover.png";
+    public static final String FIRST_SCREEN_IMG = "images/map/mapadeportugalGrey.png";
+    public static final String MAP_IMG = "images/map/mapadeportugal.png";
+    public static final String GAMEOVER_IMG = "images/map/mapadeportugalGameover.png";
 
 }

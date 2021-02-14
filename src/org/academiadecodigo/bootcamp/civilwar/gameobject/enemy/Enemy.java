@@ -6,7 +6,6 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.GameObjectsProperties;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.objinterface.Destroyable;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Direction;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -35,8 +34,8 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
         size = GameObjectsProperties.ENEMY_SIZE;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
         //rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
-        pic = new Picture(myPos.getX(), myPos.getY(), "tourist/runDown/1.png");
-        this.animator = new Animator(myPos.getX(), myPos.getY(), "tourist");
+        pic = new Picture(myPos.getX(), myPos.getY(), "images/tourist/runDown/1.png");
+        this.animator = new Animator(myPos.getX(), myPos.getY(), "images/tourist");
         //this.show();
     }
 
@@ -50,8 +49,8 @@ public class Enemy extends GameObject implements EnemyInterface, Destroyable {
         size = GameObjectsProperties.ENEMY_SIZE;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
         //rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
-        pic = new Picture(myPos.getX(), myPos.getY(), "tourist/runDown/1.png");
-        this.animator = new Animator(myPos.getX(), myPos.getY(), "tourist");
+        pic = new Picture(myPos.getX(), myPos.getY(), "images/tourist/runDown/1.png");
+        this.animator = new Animator(myPos.getX(), myPos.getY(), "images/tourist");
     }
 
     public void move() {

@@ -76,8 +76,8 @@ public class Game {
 
     public void start() throws InterruptedException {
         screen.removeMenu();
-        screen.createLivesPic();
         audioGame.playInGameMusic();
+        screen.firstScreenInterPaint();
 
         while (!player1.isDestroyed()) {
 
@@ -126,13 +126,10 @@ public class Game {
     public void gameOver() {
         screen.displayGameOver();
 
-        Text text = new Text(350, 260, "YOU DIED!!!");
         Text score = new Text(300, 300, ((Integer) player1.getScore()).toString());
         Text waves = new Text(400, 300, ((Integer) screen.getWaveCount()).toString());
-        text.grow(20, 30);
         score.grow(20, 30);
         waves.grow(20, 30);
-        text.draw();
         score.draw();
         waves.draw();
 

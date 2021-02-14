@@ -10,7 +10,6 @@ import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Direction;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.position.Position;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.Weapon;
 import org.academiadecodigo.bootcamp.civilwar.gameobject.weapon.WeaponType;
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -48,8 +47,8 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         this.myPos = myPos;
         this.size = GameObjectsProperties.PLAYER_SIZE;
         //this.rect = new Rectangle(myPos.getX(), myPos.getY(), size, size);
-        this.pic = new Picture(myPos.getX(), myPos.getY(), "player/runDown/1.png");
-        this.animator = new Animator(myPos.getX(), myPos.getY(), "player");
+        this.pic = new Picture(myPos.getX(), myPos.getY(), "images/player/runDown/1.png");
+        this.animator = new Animator(myPos.getX(), myPos.getY(), "images/player");
         //this.myPos.show();
         this.keyboard = keyboard;
         this.direction = Direction.LEFT;
@@ -180,8 +179,8 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
                 canFire = false;
                 weapons[shotsFired].setFired();
 
-                centerX = (int) (myPos.getX() + myPos.getWidth() / 2);
-                centerY = (int) (myPos.getY() + myPos.getHeight() / 2);
+                centerX = (int) (myPos.getX() /*+ myPos.getWidth() / 2*/);
+                centerY = (int) (myPos.getY() /*+ myPos.getHeight() / 2*/);
 
                 weapons[shotsFired].move(new Position(centerX, centerY), this.direction);
                 shotsFired++;
@@ -287,6 +286,8 @@ public class Player extends GameObject implements PlayerInterface, Destroyable {
         }
 
         shotsFired = 0;
+
+
     }
 
     public int getHealth() {
